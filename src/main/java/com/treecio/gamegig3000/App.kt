@@ -29,25 +29,17 @@ class App : JFrame() {
             SwingUtilities.invokeLater {
                 val app = App()
                 app.isVisible = true
-                app.pack()
                 executor.scheduleAtFixedRate({ app.run() },
                         0, (1000.0 / FPS).toLong(), TimeUnit.MILLISECONDS)
             }
         }
     }
 
-    private val frameBuffers = arrayOf(
-            BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB),
-            BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB)
-    )
-    private var openBufferIndex = 0
-    private val openBuffer get() = frameBuffers[openBufferIndex]
-    private val closedBuffer get() = frameBuffers[1 - openBufferIndex]
-    private fun incrementBuffer() {
-        openBufferIndex = 1 - openBufferIndex
-    }
+    private val openBuffer = BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB)
 
     private val panel: JPanel
+    private val startTime = System.currentTimeMillis()
+    private val time get() = System.currentTimeMillis() - startTime
 
     init {
         defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
@@ -57,14 +49,13 @@ class App : JFrame() {
                 g.drawImage(openBuffer, 0, 0, null)
             }
         }
-        panel.size = SCREEN_SIZE
+        panel.preferredSize = SCREEN_SIZE
 
         contentPane.add(panel)
         pack()
     }
 
     fun run() {
-        println(System.currentTimeMillis())
         update()
         render(openBuffer.graphics as Graphics2D)
         panel.revalidate()
@@ -78,8 +69,9 @@ class App : JFrame() {
     fun render(g: Graphics2D) {
         g.background = Color.white
         g.clearRect(0, 0, WIDTH, HEIGHT)
-        g.color = Color.red
-        g.fillRect(0, 0, WIDTH, HEIGHT)
+
+        g.color = Color.black
+        g.drawString((time/1000.0).toString(), 20, 20)
     }
 
 }
