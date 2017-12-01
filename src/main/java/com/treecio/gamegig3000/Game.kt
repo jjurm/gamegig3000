@@ -47,7 +47,6 @@ class Game {
         for (i in 0..starCount) {
             starList.add(Particle(
                     Vector2D(r.nextDouble() * App.WIDTH, r.nextDouble() * App.HEIGHT),
-                    null,
                     Vector2D(0.0, starSpeed + starSpeed * r.nextDouble())
             ))
         }

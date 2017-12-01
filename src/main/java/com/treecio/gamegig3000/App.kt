@@ -6,6 +6,7 @@ import java.awt.Graphics
 import java.awt.Graphics2D
 import java.awt.image.BufferedImage
 import java.util.concurrent.Executors
+import java.util.concurrent.ScheduledFuture
 import java.util.concurrent.TimeUnit
 import javax.swing.JFrame
 import javax.swing.JPanel
@@ -35,6 +36,7 @@ class App : JFrame() {
     private val keyboard = Keyboard()
 
     private val executor = Executors.newSingleThreadScheduledExecutor()
+    private var futureTask: ScheduledFuture<*>? = null
     private val panel: JPanel
 
     init {
@@ -56,15 +58,20 @@ class App : JFrame() {
     fun start() {
         game.initializeBackground()
         game.start()
-        executor.scheduleAtFixedRate(this::run,
+        futureTask = executor.scheduleAtFixedRate(this::run,
                 0, (1000.0 / FPS).toLong(), TimeUnit.MILLISECONDS)
     }
 
-    fun run() {
-        game.update(keyboard.newInput)
-        game.render(openBuffer.graphics as Graphics2D)
-        panel.revalidate()
-        panel.repaint()
+    private fun run() {
+        try {
+            game.update(keyboard.newInput)
+            game.render(openBuffer.graphics as Graphics2D)
+            panel.revalidate()
+            panel.repaint()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            futureTask?.cancel(false)
+        }
     }
 
 }

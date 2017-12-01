@@ -4,16 +4,19 @@ import com.treecio.gamegig3000.App;
 import com.treecio.gamegig3000.Input;
 import com.treecio.gamegig3000.Utils;
 import com.treecio.gamegig3000.graphics.Sprite;
+import com.treecio.gamegig3000.graphics.SpriteSheet;
 
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
 public class Player extends com.treecio.gamegig3000.entity.Entity {
 
+	public static Sprite ship = new Sprite(32, 0, 0, SpriteSheet.entities);
+
 	public static final int SPACE_MARGIN = App.Companion.getWIDTH() / 10;
 
 	public Player(){
 		super(new Vector2D(App.Companion.getWIDTH() / 2, (int) (App.Companion.getHEIGHT() * 0.8)),
-				0, Sprite.ship);
+				0, ship);
 	}
 	
 	public void update(Input input){

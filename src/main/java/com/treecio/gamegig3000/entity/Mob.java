@@ -2,10 +2,13 @@ package com.treecio.gamegig3000.entity;
 
 import com.treecio.gamegig3000.Input;
 import com.treecio.gamegig3000.graphics.Sprite;
+import com.treecio.gamegig3000.graphics.SpriteSheet;
 
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
 public class Mob extends Entity {
+
+    public static Sprite mob = new Sprite(32, 1, 0, SpriteSheet.entities);
 
     private final double frequency;
     private final double amplitude;
@@ -22,13 +25,13 @@ public class Mob extends Entity {
      * @param amplitude how much does it move to sides
      */
     public Mob(Vector2D pos, double angle, double frequency, double amplitude) {
-        super(pos, angle, Sprite.mob);
+        super(pos, angle, mob);
         this.amplitude = amplitude;
         this.frequency = frequency;
     }
 
     public Mob(Vector2D pos, double angle) {
-        super(pos, angle, Sprite.mob);
+        super(pos, angle, mob);
         this.amplitude = defaultAmplitude;
         this.frequency = defaultFrequency;
     }
