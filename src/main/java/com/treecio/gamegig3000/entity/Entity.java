@@ -15,11 +15,12 @@ import java.util.List;
 
 public abstract class Entity implements Renderable, Updatable {
 
-	private boolean alive = true;public Vector2D pos;
+	public Vector2D pos;
 	public double angle = 0;
 	public List<Sprite> sprites;
-	private boolean removed = false;public boolean isAlive() {
-        return alive;
+	private boolean removed = false;
+	public boolean isAlive() {
+        return !removed;
     }
 
     public double getScale() {
@@ -58,10 +59,6 @@ public abstract class Entity implements Renderable, Updatable {
         removed = true;
     }
 
-    public boolean isRemoved() {
-        return removed;
-    }
-
     protected void move(Vector2D move) {
         pos = pos.add(move);
     }
@@ -70,7 +67,7 @@ public abstract class Entity implements Renderable, Updatable {
         double d = getRadius() * 2;
         if (pos.getX() < -d || pos.getX() > App.Companion.getWIDTH() + d
                 || pos.getY() < -d || pos.getY() > App.Companion.getHEIGHT() + d) {
-            kill();
+            remove();
         }
     }
 
@@ -84,10 +81,6 @@ public abstract class Entity implements Renderable, Updatable {
 
     public boolean collidesWith(Entity entity) {
         return isAlive() && entity.isAlive() && pos.distance(entity.pos) < (getRadius() + entity.getRadius());
-    }
-
-    public void kill() {
-        alive = false;
     }
 
 }

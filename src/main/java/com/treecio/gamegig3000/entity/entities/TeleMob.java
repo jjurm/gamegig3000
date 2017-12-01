@@ -20,6 +20,8 @@ public class TeleMob extends AbstractMob {
     public static final double defaultHealth = 100;
     public static final double defaulsRelocateProbability = 0.01;
     public static final double defaultSpeed = 4;
+    public static final double explosionScale = 6;
+
 
     private double relocateProbability;
 
