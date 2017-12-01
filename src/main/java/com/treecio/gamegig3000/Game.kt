@@ -20,6 +20,7 @@ object Game {
     val player = Player()
     val mobs = ArrayList<Mob>()
     val bullets = ArrayList<Projectile>();
+    val energyBar = EnergyBar()
 
     private val mobSpawner: MobSpawner = MobSpawner(App.WIDTH, App.HEIGHT)
 
@@ -35,7 +36,6 @@ object Game {
         bullets.forEach{ it.update(input)}
         mobs.forEach { it.update(input) }
 
-
         val iterate = mobs.listIterator()
         while (iterate.hasNext()) {
             val m = iterate.next()
@@ -43,6 +43,8 @@ object Game {
             else m.update(input)
             if (mobSpawner.canSpawn(this.time)) iterate.add(mobSpawner.spawn())
         }
+
+        energyBar.update(input)
 
         time++
     }
@@ -61,6 +63,7 @@ object Game {
         mobs.forEach {
             it.render(g)
         }
+        energyBar.render(g)
     }
 
     fun initializeBackground() {

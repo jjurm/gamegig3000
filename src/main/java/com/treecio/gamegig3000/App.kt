@@ -69,7 +69,6 @@ class App : JFrame() {
                 g.drawImage(closedBuffer, (panel.width - w) / 2, 0, w, h, null)
             }
         }
-        //panel.preferredSize = SCREEN_SIZE
 
         contentPane.add(panel)
         pack()

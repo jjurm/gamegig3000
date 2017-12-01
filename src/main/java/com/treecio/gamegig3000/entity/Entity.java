@@ -1,16 +1,18 @@
 package com.treecio.gamegig3000.entity;
 
-import com.treecio.gamegig3000.Input;
+import com.treecio.gamegig3000.Renderable;
+import com.treecio.gamegig3000.Updatable;
 import com.treecio.gamegig3000.graphics.Sprite;
 
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.util.List;
 
-public abstract class Entity {
+public abstract class Entity implements Renderable, Updatable {
 
 	public Vector2D pos;
 	public double angle = 0;
@@ -30,9 +32,8 @@ public abstract class Entity {
 		spriteCount = sprites.size();
 	}
 
-    public abstract void update(Input input);
-
-	public void render(Graphics2D graphics){
+    @Override
+    public void render(@NotNull Graphics2D graphics) {
         drawRadius(graphics);
 		AffineTransform at = new AffineTransform();
 		Sprite currentSprite = sprites.get(spriteState);
