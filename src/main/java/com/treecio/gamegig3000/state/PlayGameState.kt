@@ -93,6 +93,6 @@ object PlayGameState : GameState {
         explosions.forEach { it.render(g) }
 
         g.color = Color.white
-        g.drawString(time.toString(), 10, 10)
+        g.drawString(time.toString(), 15, 15)
     }
 }
