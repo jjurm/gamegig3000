@@ -1,7 +1,6 @@
 package com.treecio.gamegig3000
 
 import com.treecio.gamegig3000.input.Keyboard
-import java.awt.Color
 import java.awt.Dimension
 import java.awt.Graphics
 import java.awt.Graphics2D
@@ -40,8 +39,6 @@ class App : JFrame() {
     private val keyboard = Keyboard()
 
     private val panel: JPanel
-    private val startTime = System.currentTimeMillis()
-    private val time get() = System.currentTimeMillis() - startTime
 
     init {
         defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
@@ -61,24 +58,10 @@ class App : JFrame() {
 
 
     fun run() {
-        update()
-        render(openBuffer.graphics as Graphics2D)
+        game.update()
+        game.render(openBuffer.graphics as Graphics2D)
         panel.revalidate()
         panel.repaint()
-    }
-
-    fun update() {
-
-    }
-
-    fun render(g: Graphics2D) {
-        g.background = Color.white
-        g.clearRect(0, 0, WIDTH, HEIGHT)
-
-        g.color = Color.black
-        g.drawString((time/1000.0).toString(), 20, 20)
-
-        game.player.render(g)
     }
 
 }
