@@ -43,6 +43,15 @@ object Game {
                 mob.kill()
                 energyBar.consume(mob.damage)
             }
+            if (mob.isAlive) {
+                for (bullet in bullets) {
+                    if (mob.collidesWith(bullet)) {
+                        mob.kill()
+                        bullet.kill()
+                        break
+                    }
+                }
+            }
         }
 
         // remove dead entities

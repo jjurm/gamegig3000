@@ -78,7 +78,7 @@ public abstract class Entity implements Renderable, Updatable {
     }
 
     public boolean collidesWith(Entity entity) {
-        return pos.distance(entity.pos) < (getRadius() + entity.getRadius());
+        return isAlive() && entity.isAlive() && pos.distance(entity.pos) < (getRadius() + entity.getRadius());
     }
 
     public void kill() {

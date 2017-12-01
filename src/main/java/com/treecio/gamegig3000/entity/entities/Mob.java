@@ -6,6 +6,7 @@ import com.treecio.gamegig3000.graphics.Sprite;
 import com.treecio.gamegig3000.graphics.SpriteSheet;
 
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +61,7 @@ public class Mob extends Entity {
     }
 
     @Override
-    public void update(Input input) {
+    public void update(@NotNull Input input) {
         this.move(new Vector2D(Math.cos(phase)*amplitude, speed));
         this.phase = phase+frequency;
 
@@ -76,11 +77,11 @@ public class Mob extends Entity {
 
     @Override
     public double getRadius() {
-        return 35;
+        return 40;
     }
 
     public double getDamage() {
-        return getScale() * 4;
+        return getScale() * 10;
     }
 
 }
