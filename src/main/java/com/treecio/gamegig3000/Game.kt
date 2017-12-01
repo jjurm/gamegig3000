@@ -14,8 +14,7 @@ import kotlin.collections.ArrayList
 
 object Game {
 
-    private val startTime = System.currentTimeMillis()
-    private val time get() = System.currentTimeMillis() - startTime
+    private var time = 0L
     private val starCount = 50;
 
     val player = Player()
@@ -44,6 +43,8 @@ object Game {
             else m.update(input)
             if (mobSpawner.canSpawn(this.time)) iterate.add(mobSpawner.spawn())
         }
+
+        time++
     }
 
 
@@ -52,7 +53,7 @@ object Game {
         g.clearRect(0, 0, App.WIDTH, App.HEIGHT)
 
         g.color = Color.white
-        g.drawString((time / 1000.0).toString(), 20, 20)
+        g.drawString(time.toString(), 20, 20)
 
         stars.forEach { it.render(g) }
         player.render(g)

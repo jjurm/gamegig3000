@@ -21,7 +21,7 @@ class App : JFrame() {
         val WIDTH = 1280
         val HEIGHT = 720
         val SCREEN_SIZE = Dimension(WIDTH, HEIGHT)
-        val FPS = 24.0
+        val FPS = 30.0
 
         @JvmStatic
         fun main(args: Array<String>) {

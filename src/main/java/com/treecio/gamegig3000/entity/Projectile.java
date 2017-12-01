@@ -22,4 +22,9 @@ public class Projectile extends Entity{
         Vector2D velocity = new Vector2D(-Math.sin(angle), -Math.cos(angle));
         pos = pos.add(velocity.scalarMultiply(speed));
     }
+
+    @Override
+    public double getRadius() {
+        return 20;
+    }
 }
