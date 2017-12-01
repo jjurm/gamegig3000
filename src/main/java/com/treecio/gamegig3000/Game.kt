@@ -18,6 +18,7 @@ object Game : Renderable, Updatable {
 
     var player = Player()
     val mobs = ArrayList<AbstractMob>()
+    val explosions = ArrayList<Explosion>()
     val bullets = ArrayList<Projectile>();
     val energyBar = EnergyBar()
 
@@ -29,6 +30,7 @@ object Game : Renderable, Updatable {
 
     fun start() {
         initializeBackground()
+        state.init()
         mobs.add(mobSpawner.spawn())
         mobs.add(ScaleMob(Vector2D((50.0), 32.0), 4.0, 100.0, ScaleMob.defaultFrequency, ScaleMob.defaultAmplitude))
         mobs.add(TeleMob(Vector2D(100.0, 150.0), 100.0, TeleMob.defaulsRelocateProbability, TeleMob.defaultSpeed));

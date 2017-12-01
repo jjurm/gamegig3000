@@ -1,6 +1,7 @@
 package com.treecio.gamegig3000.state
 
 import com.treecio.gamegig3000.*
+import com.treecio.gamegig3000.entity.entities.Explosion
 import com.treecio.gamegig3000.entity.entities.Player
 import java.awt.Color
 import java.awt.Graphics2D
@@ -20,6 +21,7 @@ object PlayGameState : GameState {
 
     override fun update(input: Input) = Game.run {
         // update each entity
+        explosions.forEach { it.update(input) }
         stars.forEach { it.update(input) }
         player.update(input)
         bullets.forEach { it.update(input) }
@@ -37,6 +39,7 @@ object PlayGameState : GameState {
                         mob.remove()
                         bullet.remove()
                         energyBar.add(Constants.BONUS_KILL)
+                        explosions.add(Explosion(mob.pos, 0.0, Explosion.sprites, 4.0))
                         break
                     }
                 }
@@ -45,7 +48,8 @@ object PlayGameState : GameState {
 
         // remove dead entities
         mobs.removeIf({ !it.isAlive })
-        bullets.removeIf({ !it.isAlive})
+        bullets.removeIf({ !it.isAlive })
+        explosions.removeIf({ !it.isAlive })
 
         mobSpawner.update();
 
@@ -77,5 +81,7 @@ object PlayGameState : GameState {
             it.render(g)
         }
         energyBar.render(g)
+
+        explosions.forEach { it.render(g) }
     }
 }
