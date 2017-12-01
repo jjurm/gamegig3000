@@ -1,6 +1,7 @@
 package com.treecio.gamegig3000.entity.entities;
 
 import com.treecio.gamegig3000.App;
+import com.treecio.gamegig3000.Game;
 import com.treecio.gamegig3000.Input;
 import com.treecio.gamegig3000.entity.Entity;
 import com.treecio.gamegig3000.graphics.Sprite;
@@ -36,14 +37,21 @@ public class TeleMob extends AbstractMob {
 
 
     public Vector2D randomPos(){
-        return new Vector2D(32+ Math.random()* (App.Companion.getWIDTH()-32), 32 + Math.random()*(App.Companion.getHEIGHT()-32));
+        return pos.add(new Vector2D(Math.random()* 64, Math.random()*64));
     }
 
     private int moveX = 0;
     private int moveY = 0;
+
     @Override
     public void update(Input input) {
-        if(Math.random() < relocateProbability) {
+
+        Vector2D direction = Game.INSTANCE.getPlayer().pos.subtract(pos).normalize();
+
+        angle = Math.atan2(direction.getY(), direction.getX())+Math.PI/2;
+        pos = pos.add(direction.scalarMultiply(speed));
+
+        /*if(Math.random() < relocateProbability) {
             this.pos = randomPos();
             this.moveX = 0;
             this.moveY = 0;
@@ -62,12 +70,14 @@ public class TeleMob extends AbstractMob {
 
         if(health<0){
             this.remove();
-        }
+        }*/
+
+        killIfOut();
 
     }
 
     @Override
     public double getRadius() {
-        return 32*getScale();
+        return 16*getScale();
     }
 }

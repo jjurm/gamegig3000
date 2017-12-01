@@ -26,6 +26,8 @@ public class ScaleMob extends AbstractMob{
     public static final double healthDecrement = 0.2;
     public static final double defaultScale = 4;
 
+    public static final double vSpeed = 1;
+
     public static List<Sprite> sprites = new ArrayList<Sprite>(){{
         add(new Sprite(32, 0, 1, SpriteSheet.entities));
     }};
@@ -43,18 +45,21 @@ public class ScaleMob extends AbstractMob{
         this.scale = Math.abs(Math.sin(phase))*amplitude;
         this.phase = phase+frequency;
 
-        health-=healthDecrement;
         this.phase += this.frequency;
+
+        pos = pos.add(new Vector2D(0, vSpeed));
 
 
         if(health<0){
             this.remove();
         }
 
+        killIfOut();
+
     }
 
     @Override
     public double getRadius() {
-        return 32*scale;
+        return 16*scale;
     }
 }

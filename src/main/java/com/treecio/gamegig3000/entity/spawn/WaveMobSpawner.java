@@ -2,6 +2,8 @@ package com.treecio.gamegig3000.entity.spawn;
 
 import com.treecio.gamegig3000.Game;
 import com.treecio.gamegig3000.entity.entities.Mob;
+import com.treecio.gamegig3000.entity.entities.ScaleMob;
+import com.treecio.gamegig3000.entity.entities.TeleMob;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
 public class WaveMobSpawner implements Spawner<Mob> {
@@ -10,7 +12,10 @@ public class WaveMobSpawner implements Spawner<Mob> {
     private int height;
 
     private final long FIRST_DELAY;
-    private final int MAX_ENTITIES = 20;
+    private final int MAX_MOBS = 20;
+    private final int MAX_TELEMOBS = 3;
+    private final int MAX_SCALEMOBS = 5;
+
 
     private long lastWave;
     private long delay;
@@ -34,6 +39,18 @@ public class WaveMobSpawner implements Spawner<Mob> {
                 (Math.random()+0.5)*Mob.defaultHealth);
     }
 
+    public TeleMob spawnTelemob(){
+        return new TeleMob(
+                new Vector2D((int)(Math.random()*width), -(int)(Math.random()*height)),
+                1,
+                0,
+                TeleMob.defaultSpeed);
+    }
+    public ScaleMob spawnScaleMob(){
+        return new ScaleMob(
+                new Vector2D((int)(Math.random()*width), -(int)(Math.random()*height)), 4.0, 100.0, ScaleMob.defaultFrequency, ScaleMob.defaultAmplitude);
+    }
+
     @Override
     public void update(){
         long now = System.currentTimeMillis();
@@ -44,8 +61,16 @@ public class WaveMobSpawner implements Spawner<Mob> {
 
             double count = Math.min(((FIRST_DELAY-delay)/(double)FIRST_DELAY), 1);
 
-            for (int i = 0; i < count*MAX_ENTITIES; i++){
+            for (int i = 0; i < count*MAX_MOBS; i++){
                 Game.INSTANCE.addMob(spawn());
+            }
+
+            for (int i = 0; i < count*MAX_TELEMOBS; i++){
+                Game.INSTANCE.addTeleMob(spawnTelemob());
+            }
+
+            for (int i = 0; i < count*MAX_SCALEMOBS; i++){
+                Game.INSTANCE.addScaleMob(spawnScaleMob());
             }
 
 

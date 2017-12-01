@@ -30,10 +30,10 @@ object Game {
     val stars = ArrayList<Particle>()
 
     fun start() {
-        mobs.add(mobSpawner.spawn())
+        /*mobs.add(mobSpawner.spawn())
         mobs.add(ScaleMob(Vector2D((50.0), 32.0), 4.0, 100.0, ScaleMob.defaultFrequency, ScaleMob.defaultAmplitude))
         mobs.add(TeleMob(Vector2D(100.0, 150.0), 100.0, TeleMob.defaulsRelocateProbability, TeleMob.defaultSpeed));
-
+        */
         /*return new Mob(
                 new Vector2D((int)(Math.random()*widthRange), -32),
         Math.random()*Math.PI*2,
@@ -124,7 +124,14 @@ object Game {
     }
 
     fun addMob(mob: Mob){
-        mobs.add(mob);
+        mobs.add(mob)
     }
 
+    fun addTeleMob(mob: TeleMob){
+        mobs.add(mob)
+    }
+
+    fun addScaleMob(mob: ScaleMob){
+        mobs.add(mob)
+    }
 }
