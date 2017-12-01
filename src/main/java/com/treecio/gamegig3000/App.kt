@@ -32,7 +32,7 @@ class App : JFrame() {
         }
     }
 
-    private val game = Game()
+    private val game = Game;
 
     private val frameBuffers = (0..10).map { BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB) }
     private var openBufferIndex = 0
