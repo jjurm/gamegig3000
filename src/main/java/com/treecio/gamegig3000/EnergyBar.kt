@@ -12,7 +12,7 @@ class EnergyBar : Renderable, Updatable {
     }
 
     fun reset() {
-        value = 30.0
+            value = 30.0
     }
 
     fun canConsume(amount: Double) = value > amount
@@ -27,7 +27,12 @@ class EnergyBar : Renderable, Updatable {
 
     override fun update(input: Input) {
         // this method is called only after all other updates are done
-        value = Utils.toRange(value + Constants.REGENERATION / App.FPS, 0.0, 100.0)
+        var addition = Constants.REGENERATION / App.FPS
+        if (input.down || input.left || input.up || input.right) {
+            addition /= 2
+        }
+        value += addition
+        value = Utils.toRange(value, 0.0, 100.0)
     }
 
     fun isPositive() = value > 0

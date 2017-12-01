@@ -3,9 +3,6 @@ package com.treecio.gamegig3000.state
 import com.treecio.gamegig3000.*
 import com.treecio.gamegig3000.entity.entities.Explosion
 import com.treecio.gamegig3000.entity.entities.Player
-import com.treecio.gamegig3000.entity.entities.ScaleMob
-import com.treecio.gamegig3000.entity.entities.TeleMob
-import org.apache.commons.math3.geometry.euclidean.twod.Vector2D
 import java.awt.Color
 import java.awt.Graphics2D
 import java.awt.image.BufferedImage
@@ -22,8 +19,8 @@ object PlayGameState : GameState {
         energyBar.reset()
 
         mobs.add(mobSpawner.spawn())
-        mobs.add(ScaleMob(Vector2D((50.0), 32.0), 4.0, 100.0, ScaleMob.defaultFrequency, ScaleMob.defaultAmplitude))
-        mobs.add(TeleMob(Vector2D(100.0, 150.0), 100.0, TeleMob.defaulsRelocateProbability, TeleMob.defaultSpeed));
+        //mobs.add(ScaleMob(Vector2D((50.0), 32.0), 4.0, 100.0, ScaleMob.defaultFrequency, ScaleMob.defaultAmplitude))
+        //mobs.add(TeleMob(Vector2D(100.0, 150.0), 100.0, TeleMob.defaulsRelocateProbability, TeleMob.defaultSpeed));
 
         Unit
     }
