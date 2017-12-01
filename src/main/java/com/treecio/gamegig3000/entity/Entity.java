@@ -42,7 +42,7 @@ public abstract class Entity implements Renderable, Updatable {
 
     @Override
     public void render(@NotNull Graphics2D graphics) {
-        drawRadius(graphics);
+        //drawRadius(graphics);
         AffineTransform at = new AffineTransform();
         Sprite currentSprite = sprites.get(spriteState);
 

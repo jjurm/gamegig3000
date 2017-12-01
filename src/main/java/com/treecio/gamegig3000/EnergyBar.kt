@@ -15,6 +15,8 @@ class EnergyBar : Renderable, Updatable {
         value = 30.0
     }
 
+    fun canConsume(amount: Double) = value > amount
+
     fun consume(amount: Double) {
         value -= amount
     }

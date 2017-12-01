@@ -40,7 +40,8 @@ public class Player extends com.treecio.gamegig3000.entity.Entity {
 			move(new Vector2D(xa, ya).normalize().scalarMultiply(getSpeed()));
 		}
 
-		if (input.space) {
+		if (Game.INSTANCE.getEnergyBar().canConsume(Constants.COST_FIRE) && input.space) {
+            Game.INSTANCE.getEnergyBar().consume(Constants.COST_FIRE);
 			fire();
 		}
 	}
@@ -49,7 +50,6 @@ public class Player extends com.treecio.gamegig3000.entity.Entity {
 		long now = System.currentTimeMillis();
 		if (now > nextShot) {
 
-			Game.INSTANCE.getEnergyBar().consume(Constants.COST_FIRE);
 			Game.INSTANCE.addBullet(this.pos, 0, Projectile.bullet, 2, 32);
 
 			nextShot = now + fireCooldown;
@@ -60,7 +60,7 @@ public class Player extends com.treecio.gamegig3000.entity.Entity {
 		super.move(move);
 		pos = new Vector2D(
 				Utils.toRange(pos.getX(), SPACE_MARGIN, App.Companion.getWIDTH() - SPACE_MARGIN),
-				Utils.toRange(pos.getY(), App.Companion.getHEIGHT() / 4, App.Companion.getHEIGHT() - SPACE_MARGIN / 2)
+				Utils.toRange(pos.getY(), SPACE_MARGIN, App.Companion.getHEIGHT() - SPACE_MARGIN / 2)
 		);
 	}
 

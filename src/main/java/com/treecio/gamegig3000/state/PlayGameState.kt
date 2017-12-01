@@ -80,9 +80,6 @@ object PlayGameState : GameState {
         g.background = Color.black;
         g.clearRect(0, 0, App.WIDTH, App.HEIGHT)
 
-        g.color = Color.white
-        g.drawString(time.toString(), 20, 20)
-
         stars.forEach { it.render(g) }
         player.render(g)
         bullets.forEach { it.render(g) }
@@ -92,5 +89,8 @@ object PlayGameState : GameState {
         energyBar.render(g)
 
         explosions.forEach { it.render(g) }
+
+        g.color = Color.white
+        g.drawString(time.toString(), 10, 10)
     }
 }
