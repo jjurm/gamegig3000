@@ -21,7 +21,7 @@ class App : JFrame() {
         val WIDTH = 1280
         val HEIGHT = 720
         val SCREEN_SIZE = Dimension(WIDTH, HEIGHT)
-        val FPS = 24.0
+        val FPS = 30.0
 
         @JvmStatic
         fun main(args: Array<String>) {
@@ -87,11 +87,14 @@ class App : JFrame() {
 
     private fun run() {
         try {
-            game.update(keyboard.newInput)
-            game.render(openBuffer.graphics as Graphics2D)
-            panel.revalidate()
-            incrementBuffer()
-            panel.repaint()
+            val input = keyboard.newInput
+            if (!input.p) {
+                game.update(input)
+                game.render(openBuffer.graphics as Graphics2D)
+                panel.revalidate()
+                incrementBuffer()
+                panel.repaint()
+            }
         } catch (e: Exception) {
             e.printStackTrace()
             futureTask?.cancel(false)
