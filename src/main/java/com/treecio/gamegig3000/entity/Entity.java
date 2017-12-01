@@ -6,7 +6,7 @@ import java.util.*;
 
 import com.treecio.gamegig3000.graphics.Screen;
 import com.treecio.gamegig3000.graphics.Sprite;
-import com.treecio.gamegig3000.level.Level;
+
 
 public abstract class Entity {
 
@@ -14,6 +14,13 @@ public abstract class Entity {
 	public double angle = 0;
 	public Sprite sprite;
 	private boolean removed = false;
+
+	public Entity(int x, int y, double angle, Sprite sprite){
+		this.sprite = sprite;
+		this.x = x;
+		this.y = y;
+		this.angle = angle;
+	}
 
 	public abstract void update();
 
@@ -24,7 +31,8 @@ public abstract class Entity {
 		at.rotate(angle);
 		at.translate(-sprite.SIZE/2, -sprite.SIZE/2);
 
-		graphics.drawImage(sprite.getImage(), at, null);
+		throw new RuntimeException("Uncomment after implementing sprite.getImage()");
+		//graphics.drawImage(sprite.getImage(), at, null);
 	}
 
 

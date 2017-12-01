@@ -1,7 +1,7 @@
 package com.treecio.gamegig3000.entity;
 
 
-import com.treecio.gamegig3000.Game;
+
 import com.treecio.gamegig3000.graphics.Screen;
 import com.treecio.gamegig3000.graphics.Sprite;
 import com.treecio.gamegig3000.input.Keyboard;
@@ -12,16 +12,10 @@ import java.awt.*;
 public class Player extends com.treecio.gamegig3000.entity.Entity {
 
 	private Keyboard input;
-	private Sprite sprite;
+
 	
-	public Player(Keyboard input){
-		this.input = input;
-		sprite = Sprite.player_forward;
-	}
-	
-	public Player(int x, int y, Keyboard input){
-		this.x = x;
-		this.y = y;
+	public Player(int x, int y, Keyboard input, Sprite sprite){
+		super(x, y,0, sprite);
 		this.input = input;
 	}
 	
@@ -40,12 +34,6 @@ public class Player extends com.treecio.gamegig3000.entity.Entity {
 	private void move(int xa, int ya){
 		x += xa;
 		y += ya;
-	}
-
-
-	public void render(Graphics graphics){
-
-		
 	}
 	
 }
