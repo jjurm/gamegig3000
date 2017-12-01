@@ -1,13 +1,14 @@
 package com.treecio.gamegig3000
 
+import com.treecio.gamegig3000.entity.Entity
 import com.treecio.gamegig3000.entity.Particle
 import com.treecio.gamegig3000.entity.Projectile
-import com.treecio.gamegig3000.entity.entities.Mob
-import com.treecio.gamegig3000.entity.entities.Player
+import com.treecio.gamegig3000.entity.entities.*
 import com.treecio.gamegig3000.entity.spawn.MobSpawner
 import com.treecio.gamegig3000.entity.spawn.Spawner
 import com.treecio.gamegig3000.entity.spawn.WaveMobSpawner
 import com.treecio.gamegig3000.graphics.Sprite
+import javafx.scene.transform.Scale
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D
 import java.awt.Color
 import java.awt.Graphics2D
@@ -20,7 +21,7 @@ object Game {
     private val starCount = 50;
 
     val player = Player()
-    val mobs = ArrayList<Mob>()
+    val mobs = ArrayList<AbstractMob>()
     val bullets = ArrayList<Projectile>();
     val energyBar = EnergyBar()
 
@@ -29,6 +30,18 @@ object Game {
     val stars = ArrayList<Particle>()
 
     fun start() {
+        mobs.add(mobSpawner.spawn())
+        mobs.add(ScaleMob(Vector2D((50.0), 32.0), 4.0, 100.0, ScaleMob.defaultFrequency, ScaleMob.defaultAmplitude))
+        mobs.add(TeleMob(Vector2D(100.0, 150.0), 100.0, TeleMob.defaulsRelocateProbability, TeleMob.defaultSpeed));
+
+        /*return new Mob(
+                new Vector2D((int)(Math.random()*widthRange), -32),
+        Math.random()*Math.PI*2,
+        (Math.random()+0.5)*Mob.defaultFrequency,
+        (Math.random()+0.5)*Mob.defaultAmplitude,
+        4,
+        (Math.random()+0.5)*Mob.defaultSpeed,
+        (Math.random()+0.5)*Mob.defaultHealth);*/
     }
 
     fun update(input: Input) {

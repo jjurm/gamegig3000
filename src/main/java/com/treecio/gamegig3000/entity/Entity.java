@@ -15,21 +15,17 @@ import java.util.List;
 
 public abstract class Entity implements Renderable, Updatable {
 
-    private boolean alive = true;
-    public Vector2D pos;
-    public double angle = 0;
-    public List<Sprite> sprites;
-    private boolean removed = false;
-
-    public boolean isAlive() {
+	private boolean alive = true;public Vector2D pos;
+	public double angle = 0;
+	public List<Sprite> sprites;
+	private boolean removed = false;public boolean isAlive() {
         return alive;
     }
 
     public double getScale() {
         return scale;
     }
-
-    private double scale;
+	protected double scale;
 
     protected int spriteState;
     protected int spriteCount;

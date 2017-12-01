@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Mob extends Entity {
+public class Mob extends AbstractMob {
 
 
     public static List<Sprite> mob = new ArrayList<Sprite>(){{
@@ -83,8 +83,6 @@ public class Mob extends Entity {
         return 40;
     }
 
-    public double getDamage() {
-        return getScale() * Constants.DAMAGE_K;
-    }
+
 
 }
