@@ -5,6 +5,8 @@ import com.treecio.gamegig3000.entity.Projectile
 import com.treecio.gamegig3000.entity.entities.Mob
 import com.treecio.gamegig3000.entity.entities.Player
 import com.treecio.gamegig3000.entity.spawn.MobSpawner
+import com.treecio.gamegig3000.entity.spawn.Spawner
+import com.treecio.gamegig3000.entity.spawn.WaveMobSpawner
 import com.treecio.gamegig3000.graphics.Sprite
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D
 import java.awt.Color
@@ -22,12 +24,11 @@ object Game {
     val bullets = ArrayList<Projectile>();
     val energyBar = EnergyBar()
 
-    private val mobSpawner: MobSpawner = MobSpawner(App.WIDTH, App.HEIGHT)
+    private val mobSpawner: WaveMobSpawner = WaveMobSpawner(App.WIDTH, App.HEIGHT, 5000)
 
     val stars = ArrayList<Particle>()
 
     fun start() {
-        mobs.add(mobSpawner.spawn())
     }
 
     fun update(input: Input) {
@@ -66,8 +67,9 @@ object Game {
             val m = iterate.next()
             if (m.isRemoved) iterate.remove()
             else m.update(input)
-            if (mobSpawner.canSpawn(this.time)) iterate.add(mobSpawner.spawn())
         }
+
+        mobSpawner.update();
 
         energyBar.update(input)
 
@@ -106,6 +108,10 @@ object Game {
 
     fun addBullet(pos: Vector2D, angle: Double, sprites: List<Sprite>, scale: Double, speed: Double) {
         bullets.add(Projectile(pos, angle, sprites, scale, speed));
+    }
+
+    fun addMob(mob: Mob){
+        mobs.add(mob);
     }
 
 }

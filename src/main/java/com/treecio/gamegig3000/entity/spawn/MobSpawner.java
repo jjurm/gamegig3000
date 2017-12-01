@@ -36,4 +36,9 @@ public class MobSpawner implements Spawner<Mob> {
 
         return Math.random() < diff;
     }
+
+    @Override
+    public void update(){
+
+    }
 }
