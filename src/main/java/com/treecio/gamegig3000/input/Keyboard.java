@@ -26,6 +26,7 @@ public class Keyboard implements KeyListener {
 	}
 
 	public void keyTyped(KeyEvent e) {
+
 	}
 
 	public Input getNewInput() {

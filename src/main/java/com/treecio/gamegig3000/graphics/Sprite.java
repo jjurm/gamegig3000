@@ -11,10 +11,12 @@ public class Sprite {
 	
 	public static Sprite ship = new Sprite(32, 0, 0, SpriteSheet.entities);
 
+	public static Sprite mob = new Sprite(32, 1, 0, SpriteSheet.entities);
+
 	public Sprite(int size, int x, int y, SpriteSheet sheet) {
 		this.size = size;
-		this.x = x * size;
-		this.y = y * size;
+		this.x = x;
+		this.y = y;
 		this.sheet = sheet;
 		load();
 	}
