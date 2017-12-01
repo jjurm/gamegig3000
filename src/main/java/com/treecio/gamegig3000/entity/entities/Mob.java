@@ -76,7 +76,11 @@ public class Mob extends Entity {
 
     @Override
     public double getRadius() {
-        return 70;
+        return 35;
+    }
+
+    public double getDamage() {
+        return getScale() * 4;
     }
 
 }

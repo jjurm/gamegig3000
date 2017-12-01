@@ -31,6 +31,6 @@ public class Projectile extends Entity{
 
     @Override
     public double getRadius() {
-        return 20;
+        return 10;
     }
 }

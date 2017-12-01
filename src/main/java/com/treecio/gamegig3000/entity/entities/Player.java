@@ -62,7 +62,7 @@ public class Player extends com.treecio.gamegig3000.entity.Entity {
 
 	@Override
 	public double getRadius() {
-		return 23 * 4;
+		return 5 * 4;
 	}
 
 	private int getSpeed() {

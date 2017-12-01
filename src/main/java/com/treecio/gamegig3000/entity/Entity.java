@@ -14,38 +14,47 @@ import java.util.List;
 
 public abstract class Entity implements Renderable, Updatable {
 
-	public Vector2D pos;
-	public double angle = 0;
-	public List<Sprite> sprites;
-	private boolean removed = false;
-	private double scale;
+    private boolean alive = true;
+    public Vector2D pos;
+    public double angle = 0;
+    public List<Sprite> sprites;
+    private boolean removed = false;
 
-	protected int spriteState;
-	protected int spriteCount;
+    public boolean isAlive() {
+        return alive;
+    }
 
-	public Entity(Vector2D pos, double angle, List<Sprite> sprites, double scale){
-		this.pos = pos;
-		this.sprites = sprites;
-		this.angle = angle;
-		this.scale = scale;
-		this.spriteState = 0;
-		spriteCount = sprites.size();
-	}
+    public double getScale() {
+        return scale;
+    }
+
+    private double scale;
+
+    protected int spriteState;
+    protected int spriteCount;
+
+    public Entity(Vector2D pos, double angle, List<Sprite> sprites, double scale) {
+        this.pos = pos;
+        this.sprites = sprites;
+        this.angle = angle;
+        this.scale = scale;
+        this.spriteState = 0;
+        spriteCount = sprites.size();
+    }
 
     @Override
     public void render(@NotNull Graphics2D graphics) {
         drawRadius(graphics);
-		AffineTransform at = new AffineTransform();
-		Sprite currentSprite = sprites.get(spriteState);
+        AffineTransform at = new AffineTransform();
+        Sprite currentSprite = sprites.get(spriteState);
 
-		at.translate(pos.getX(), pos.getY());
-		at.rotate(angle);
-		at.scale(scale,scale);
-		at.translate(-currentSprite.getSize()/2, -currentSprite.getSize()/2);
+        at.translate(pos.getX(), pos.getY());
+        at.rotate(angle);
+        at.scale(scale, scale);
+        at.translate(-currentSprite.getSize() / 2, -currentSprite.getSize() / 2);
 
-		graphics.drawImage(currentSprite.getImage(), at, null);
-
-	}
+        graphics.drawImage(currentSprite.getImage(), at, null);
+    }
 
 
     public void remove() {
@@ -65,6 +74,15 @@ public abstract class Entity implements Renderable, Updatable {
     public void drawRadius(Graphics2D g) {
         g.setColor(new Color(255, 0, 0, 50));
         double r = getRadius();
-        g.fillOval((int) (pos.getX() - r / 2), (int) (pos.getY() - r / 2), (int) r, (int) r);
+        g.fillOval((int) (pos.getX() - r), (int) (pos.getY() - r), (int) r * 2, (int) r * 2);
     }
+
+    public boolean collidesWith(Entity entity) {
+        return pos.distance(entity.pos) < (getRadius() + entity.getRadius());
+    }
+
+    public void kill() {
+        alive = false;
+    }
+
 }

@@ -39,6 +39,6 @@ public class Particle extends Entity {
 
     @Override
     public double getRadius() {
-        return scale * 16 * 4;
+        return scale * 8 * 4;
     }
 }

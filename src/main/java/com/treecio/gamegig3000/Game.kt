@@ -31,10 +31,22 @@ object Game {
     }
 
     fun update(input: Input) {
+        // update each entity
         stars.forEach { it.update(input) }
         player.update(input)
-        bullets.forEach{ it.update(input)}
+        bullets.forEach { it.update(input) }
         mobs.forEach { it.update(input) }
+
+        // detect collisions
+        for (mob in mobs) {
+            if (player.collidesWith(mob)) {
+                mob.kill()
+                energyBar.consume(mob.damage)
+            }
+        }
+
+        // remove dead entities
+        mobs.removeIf({ !it.isAlive })
 
         val iterate = mobs.listIterator()
         while (iterate.hasNext()) {
@@ -59,7 +71,7 @@ object Game {
 
         stars.forEach { it.render(g) }
         player.render(g)
-        bullets.forEach{ it.render(g) }
+        bullets.forEach { it.render(g) }
         mobs.forEach {
             it.render(g)
         }
@@ -75,11 +87,11 @@ object Game {
             stars.add(Particle(
                     Vector2D(r.nextDouble() * App.WIDTH, r.nextDouble() * App.HEIGHT),
                     Vector2D(0.0, starSpeed + starSpeed * speed)
-                    ,1/(4-2*speed)))
+                    , 1 / (4 - 2 * speed)))
         }
     }
 
-    fun addBullet(pos: Vector2D, angle: Double, sprites: List<Sprite>, scale: Double, speed: Double){
+    fun addBullet(pos: Vector2D, angle: Double, sprites: List<Sprite>, scale: Double, speed: Double) {
         bullets.add(Projectile(pos, angle, sprites, scale, speed));
     }
 
