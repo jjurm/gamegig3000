@@ -5,10 +5,14 @@ import java.awt.Graphics2D
 
 class EnergyBar : Renderable, Updatable {
 
-    private var value = 30.0
+    private var value: Double = 0.0
 
     companion object {
         val HEIGHT = 8
+    }
+
+    fun reset() {
+        value = 30.0
     }
 
     fun consume(amount: Double) {
@@ -20,10 +24,11 @@ class EnergyBar : Renderable, Updatable {
     }
 
     override fun update(input: Input) {
-        value = Math.min(value + Constants.REGENERATION / App.FPS, 100.0)
+        // this method is called only after all other updates are done
+        value = Utils.toRange(value + Constants.REGENERATION / App.FPS, 0.0, 100.0)
     }
 
-    fun isAlive() = value >= 0
+    fun isPositive() = value > 0
 
     override fun render(g: Graphics2D) {
         val alpha = 100

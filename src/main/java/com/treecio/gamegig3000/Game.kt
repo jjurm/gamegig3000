@@ -1,36 +1,34 @@
 package com.treecio.gamegig3000
 
-import com.treecio.gamegig3000.entity.Entity
 import com.treecio.gamegig3000.entity.Particle
 import com.treecio.gamegig3000.entity.Projectile
 import com.treecio.gamegig3000.entity.entities.*
-import com.treecio.gamegig3000.entity.spawn.MobSpawner
-import com.treecio.gamegig3000.entity.spawn.Spawner
 import com.treecio.gamegig3000.entity.spawn.WaveMobSpawner
 import com.treecio.gamegig3000.graphics.Sprite
-import javafx.scene.transform.Scale
+import com.treecio.gamegig3000.state.GameState
+import com.treecio.gamegig3000.state.PlayGameState
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D
-import java.awt.Color
 import java.awt.Graphics2D
 import java.util.*
 import kotlin.collections.ArrayList
 
-object Game {
+object Game : Renderable, Updatable {
 
-    private var time = 0L
-    private val starCount = 50;
+    var time = 0L
 
-    val player = Player()
+    var player = Player()
     val mobs = ArrayList<AbstractMob>()
-    val explosions = ArrayList<Explosion>()
     val bullets = ArrayList<Projectile>();
     val energyBar = EnergyBar()
 
-    private val mobSpawner: WaveMobSpawner = WaveMobSpawner(App.WIDTH, App.HEIGHT, 5000)
-
+    val mobSpawner: WaveMobSpawner = WaveMobSpawner(App.WIDTH, App.HEIGHT, 5000)
+    val starCount = 50
     val stars = ArrayList<Particle>()
 
+    var state: GameState = PlayGameState
+
     fun start() {
+        initializeBackground()
         mobs.add(mobSpawner.spawn())
         mobs.add(ScaleMob(Vector2D((50.0), 32.0), 4.0, 100.0, ScaleMob.defaultFrequency, ScaleMob.defaultAmplitude))
         mobs.add(TeleMob(Vector2D(100.0, 150.0), 100.0, TeleMob.defaulsRelocateProbability, TeleMob.defaultSpeed));
@@ -45,75 +43,23 @@ object Game {
         (Math.random()+0.5)*Mob.defaultHealth);*/
     }
 
-    fun update(input: Input) {
-        // update each entity
-        explosions.forEach { it.update(input) }
-        stars.forEach { it.update(input) }
-        player.update(input)
-        bullets.forEach { it.update(input) }
-        mobs.forEach { it.update(input) }
-
-        // detect collisions
-        for (mob in mobs) {
-            if (player.collidesWith(mob)) {
-                mob.kill()
-                energyBar.consume(mob.damage)
-            }
-            if (mob.isAlive) {
-                for (bullet in bullets) {
-                    if (mob.collidesWith(bullet)) {
-                        this.explosions.add(Explosion(mob.pos, 0.0, Explosion.sprites, 4.0))
-                        mob.kill()
-                        bullet.kill()
-                        energyBar.add(Constants.BONUS_KILL)
-                        break
-                    }
-                }
-            }
-        }
-
-        // remove dead entities
-        mobs.removeIf({ !it.isAlive })
-        bullets.removeIf({ !it.isAlive})
-
-        explosions.removeIf({it.isRemoved})
-
-        // check if not game over
-
-        val iterate = mobs.listIterator()
-        while (iterate.hasNext()) {
-            val m = iterate.next()
-            if (m.isRemoved) iterate.remove()
-            else m.update(input)
-        }
-
-        mobSpawner.update();
-
-        energyBar.update(input)
-
-        time++
+    override fun update(input: Input) {
+        state.update(input)
     }
 
-
-    fun render(g: Graphics2D) {
-        g.background = Color.black;
-        g.clearRect(0, 0, App.WIDTH, App.HEIGHT)
-
-        g.color = Color.white
-        g.drawString(time.toString(), 20, 20)
-
-        stars.forEach { it.render(g) }
-        player.render(g)
-        bullets.forEach { it.render(g) }
-        mobs.forEach {
-            it.render(g)
-        }
-        energyBar.render(g)
-
-        explosions.forEach { it.render(g) }
+    override fun render(g: Graphics2D) {
+        state.render(g)
     }
 
-    fun initializeBackground() {
+    fun manageState(input: Input) {
+        val newState = state.getNextState(input)
+        if (state != newState) {
+            state = newState
+            state.init()
+        }
+    }
+
+    private fun initializeBackground() {
         val r = Random()
         val starSpeed = 6;
 

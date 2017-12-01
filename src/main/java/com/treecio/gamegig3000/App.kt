@@ -23,10 +23,12 @@ class App : JFrame() {
         val SCREEN_SIZE = Dimension(WIDTH, HEIGHT)
         val FPS = 30.0
 
+        lateinit var app: App
+
         @JvmStatic
         fun main(args: Array<String>) {
             SwingUtilities.invokeLater {
-                val app = App()
+                app = App()
                 app.start()
             }
         }
@@ -36,8 +38,8 @@ class App : JFrame() {
 
     private val frameBuffers = (0..10).map { BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB) }
     private var openBufferIndex = 0
-    private val openBuffer get() = frameBuffers[openBufferIndex]
-    private val closedBuffer get() = frameBuffers[(openBufferIndex - 1 + frameBuffers.size) % frameBuffers.size]
+    val openBuffer get() = frameBuffers[openBufferIndex]
+    val closedBuffer get() = frameBuffers[(openBufferIndex - 1 + frameBuffers.size) % frameBuffers.size]
     private fun incrementBuffer() {
         openBufferIndex = (openBufferIndex + 1) % frameBuffers.size
     }
@@ -78,7 +80,6 @@ class App : JFrame() {
     }
 
     fun start() {
-        game.initializeBackground()
         game.start()
         futureTask = executor.scheduleAtFixedRate(this::run,
                 0, (1000.0 / FPS).toLong(), TimeUnit.MILLISECONDS)
@@ -93,6 +94,7 @@ class App : JFrame() {
                 panel.revalidate()
                 incrementBuffer()
                 panel.repaint()
+                game.manageState(input)
             }
         } catch (e: Exception) {
             e.printStackTrace()
