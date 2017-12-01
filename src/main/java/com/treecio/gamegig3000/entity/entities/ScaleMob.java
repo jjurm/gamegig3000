@@ -1,9 +1,9 @@
 package com.treecio.gamegig3000.entity.entities;
 
 import com.treecio.gamegig3000.Input;
-import com.treecio.gamegig3000.entity.Entity;
 import com.treecio.gamegig3000.graphics.Sprite;
 import com.treecio.gamegig3000.graphics.SpriteSheet;
+
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
 import java.util.ArrayList;
@@ -43,7 +43,7 @@ public class ScaleMob extends AbstractMob{
 
     @Override
     public void update(Input input) {
-        this.scale = Math.abs(Math.sin(phase))*amplitude;
+        this.scale = Math.abs(Math.sin(phase))*amplitude+1;
         this.phase = phase+frequency;
 
         this.phase += this.frequency;

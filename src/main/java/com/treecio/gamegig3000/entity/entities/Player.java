@@ -41,7 +41,6 @@ public class Player extends com.treecio.gamegig3000.entity.Entity {
 		}
 
 		if (Game.INSTANCE.getEnergyBar().canConsume(Constants.COST_FIRE) && input.space) {
-            Game.INSTANCE.getEnergyBar().consume(Constants.COST_FIRE);
 			fire();
 		}
 	}
@@ -50,6 +49,7 @@ public class Player extends com.treecio.gamegig3000.entity.Entity {
 		long now = System.currentTimeMillis();
 		if (now > nextShot) {
 
+            Game.INSTANCE.getEnergyBar().consume(Constants.COST_FIRE);
 			Game.INSTANCE.addBullet(this.pos, 0, Projectile.bullet, 2, 32);
 
 			nextShot = now + fireCooldown;

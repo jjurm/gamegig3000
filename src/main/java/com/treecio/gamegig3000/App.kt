@@ -14,7 +14,7 @@ import javax.swing.JPanel
 import javax.swing.SwingUtilities
 import javax.swing.WindowConstants
 
-class App : JFrame() {
+class App : JFrame("DeepSpace") {
 
     companion object {
 
