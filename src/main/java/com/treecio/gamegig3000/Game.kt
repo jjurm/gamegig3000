@@ -24,7 +24,7 @@ class Game {
     }
 
     fun update(input: Input) {
-        stars.forEach{ it.update()}
+        stars.forEach{ it.update(input)}
         player.update(input)
         mobs.forEach { it.update(input) }
     }
