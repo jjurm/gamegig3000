@@ -38,6 +38,7 @@ public class Mob extends AbstractMob {
     public static final double healthDecrement = 0.2;
     public static final double defaultSpeed = 4;
 
+
     /**
      * @param pos
      * @param angle
