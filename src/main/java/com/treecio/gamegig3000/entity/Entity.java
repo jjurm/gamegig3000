@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.util.*;
 
-import com.treecio.gamegig3000.graphics.Screen;
 import com.treecio.gamegig3000.graphics.Sprite;
 
 import java.awt.Graphics2D;
@@ -31,7 +30,7 @@ public abstract class Entity {
 
 		at.translate(x,y);
 		at.rotate(angle);
-		at.translate(-sprite.SIZE/2, -sprite.SIZE/2);
+		at.translate(-sprite.getSize()/2, -sprite.getSize()/2);
 
 		throw new RuntimeException("Uncomment after implementing sprite.getImage()");
 		//graphics.drawImage(sprite.getImage(), at, null);

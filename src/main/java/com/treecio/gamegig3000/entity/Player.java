@@ -1,8 +1,5 @@
 package com.treecio.gamegig3000.entity;
 
-
-
-import com.treecio.gamegig3000.graphics.Screen;
 import com.treecio.gamegig3000.graphics.Sprite;
 import com.treecio.gamegig3000.input.Keyboard;
 import com.treecio.gamegig3000.input.Mouse;
