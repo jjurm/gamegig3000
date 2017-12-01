@@ -5,14 +5,19 @@ import com.treecio.gamegig3000.graphics.Sprite;
 import com.treecio.gamegig3000.graphics.SpriteSheet;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Projectile extends Entity{
 
     private final double speed;
 
-    public static Sprite bullet = new Sprite(32, 6, 0, SpriteSheet.entities);
+    public static List<Sprite> bullet = new ArrayList<Sprite>(){{
+        add(new Sprite(32, 6, 0, SpriteSheet.entities));
+    }};
 
-    public Projectile(Vector2D pos, double angle, Sprite sprite, double scale, double speed){
-        super(pos, angle, sprite, scale);
+    public Projectile(Vector2D pos, double angle, List<Sprite> sprites, double scale, double speed){
+        super(pos, angle, sprites, scale);
         this.speed = speed;
 
     }

@@ -76,8 +76,8 @@ object Game {
         }
     }
 
-    fun addBullet(pos: Vector2D, angle: Double, sprite: Sprite, scale: Double, speed: Double){
-        bullets.add(Projectile(pos, angle, sprite, scale, speed));
+    fun addBullet(pos: Vector2D, angle: Double, sprites: List<Sprite>, scale: Double, speed: Double){
+        bullets.add(Projectile(pos, angle, sprites, scale, speed));
     }
 
 }
