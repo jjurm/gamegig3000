@@ -3,6 +3,7 @@ package com.treecio.gamegig3000.entity.entities;
 import com.treecio.gamegig3000.Constants;
 import com.treecio.gamegig3000.entity.Entity;
 import com.treecio.gamegig3000.graphics.Sprite;
+
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
 import java.util.List;
@@ -16,4 +17,5 @@ public abstract class AbstractMob extends Entity {
     public double getDamage() {
         return getScale() * Constants.DAMAGE_K;
     }
+
 }

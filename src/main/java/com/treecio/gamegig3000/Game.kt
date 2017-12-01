@@ -31,19 +31,6 @@ object Game : Renderable, Updatable {
     fun start() {
         initializeBackground()
         state.init()
-        /*mobs.add(mobSpawner.spawn())
-        mobs.add(mobSpawner.spawn())
-        mobs.add(ScaleMob(Vector2D((50.0), 32.0), 4.0, 100.0, ScaleMob.defaultFrequency, ScaleMob.defaultAmplitude))
-        mobs.add(TeleMob(Vector2D(100.0, 150.0), 100.0, TeleMob.defaulsRelocateProbability, TeleMob.defaultSpeed));
-        */
-        /*return new Mob(
-                new Vector2D((int)(Math.random()*widthRange), -32),
-        Math.random()*Math.PI*2,
-        (Math.random()+0.5)*Mob.defaultFrequency,
-        (Math.random()+0.5)*Mob.defaultAmplitude,
-        4,
-        (Math.random()+0.5)*Mob.defaultSpeed,
-        (Math.random()+0.5)*Mob.defaultHealth);*/
     }
 
     override fun update(input: Input) {

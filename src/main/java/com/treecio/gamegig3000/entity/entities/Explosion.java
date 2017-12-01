@@ -31,7 +31,7 @@ public class Explosion extends Entity {
 
     @Override
     public double getRadius() {
-        return 32*scale;
+        return 0;
     }
 
     public void update(@NotNull Input input) {
@@ -44,5 +44,10 @@ public class Explosion extends Entity {
 
         if(spriteState >= spriteCount-1) remove();
         killIfOut();
+    }
+
+    @Override
+    public boolean collidesWith(Entity entity) {
+        return false;
     }
 }
