@@ -3,12 +3,10 @@ package com.treecio.gamegig3000.state
 import com.treecio.gamegig3000.App
 import com.treecio.gamegig3000.Game
 import com.treecio.gamegig3000.Input
-import com.treecio.gamegig3000.graphics.Sprite
 import java.awt.Color
 import java.awt.Font
-import java.awt.Graphics2D
 import java.awt.Font.PLAIN
-import java.awt.image.BufferedImage
+import java.awt.Graphics2D
 
 
 object GameOverState : ScreenOverlayState() {
@@ -44,6 +42,7 @@ object GameOverState : ScreenOverlayState() {
         g.font = Font("OCR A Extended", PLAIN, textSize)
         g.drawString("GAME OVER", (App.Companion.WIDTH/2)-textSize*8/2, App.Companion.HEIGHT/2)
         g.drawString("Score: " + Game.time, (App.Companion.WIDTH/2)-textSize*9/2, App.Companion.HEIGHT/2 + 50)
+        g.drawString("R for restart", (App.Companion.WIDTH/2)-textSize*10/2, App.Companion.HEIGHT/2 + 100)
 
         // show "Game over"
     }
