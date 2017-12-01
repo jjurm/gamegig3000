@@ -12,9 +12,9 @@ public class WaveMobSpawner implements Spawner<Mob> {
     private int height;
 
     private final long FIRST_DELAY;
-    private final int MAX_MOBS = 10;
-    private final int MAX_TELEMOBS = 2;
-    private final int MAX_SCALEMOBS = 3;
+    private final int MAX_MOBS = 3;
+    private final int MAX_TELEMOBS = 1;
+    private final int MAX_SCALEMOBS = 1;
 
 
     private long lastWave;
@@ -65,7 +65,7 @@ public class WaveMobSpawner implements Spawner<Mob> {
                 Game.INSTANCE.addMob(spawn());
             }
 
-            for (int i = 0; i < count*MAX_TELEMOBS; i++){
+            for (int i = 0; i < Math.max(count*MAX_TELEMOBS-1,0); i++){
                 Game.INSTANCE.addTeleMob(spawnTelemob());
             }
 

@@ -66,7 +66,7 @@ public abstract class Entity implements Renderable, Updatable {
     protected void killIfOut() {
         double d = getRadius() * 2;
         if (pos.getX() < -d || pos.getX() > App.Companion.getWIDTH() + d
-                || pos.getY() < -d || pos.getY() > App.Companion.getHEIGHT() + d) {
+                || pos.getY() < -(App.Companion.getHEIGHT()+d) || pos.getY() > App.Companion.getHEIGHT() + d) {
             remove();
         }
     }

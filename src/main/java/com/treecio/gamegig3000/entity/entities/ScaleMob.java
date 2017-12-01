@@ -34,7 +34,7 @@ public class ScaleMob extends AbstractMob{
     }};
 
     public ScaleMob(Vector2D pos, double scale, double health, double frequency, double amplitude){
-        super(pos, 0, sprites, scale);
+        super(pos, Math.PI, sprites, scale);
         this.health = health;
         this.frequency = frequency;
         this.amplitude = amplitude;
@@ -50,10 +50,6 @@ public class ScaleMob extends AbstractMob{
 
         pos = pos.add(new Vector2D(0, vSpeed));
 
-
-        if(health<0){
-            this.remove();
-        }
 
         killIfOut();
 
