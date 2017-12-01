@@ -38,14 +38,17 @@ public class WaveMobSpawner implements Spawner<Mob> {
     public void update(){
         long now = System.currentTimeMillis();
         if (now > lastWave + delay){
+
+            delay *= 0.95;
+            if (delay < 2000) delay = 2000;
+
             double count = Math.min(((FIRST_DELAY-delay)/(double)FIRST_DELAY), 1);
 
             for (int i = 0; i < count*MAX_ENTITIES; i++){
                 Game.INSTANCE.addMob(spawn());
             }
 
-            delay *= 0.95;
-            if (delay < 2000) delay = 2000;
+
             lastWave = now;
         }
     }
