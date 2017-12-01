@@ -7,9 +7,6 @@ import com.treecio.gamegig3000.graphics.SpriteSheet;
 
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
-import java.awt.*;
-import java.awt.geom.AffineTransform;
-
 public class Particle extends Entity {
 
     public static Sprite star = new Sprite(32, 4, 0, SpriteSheet.entities);
@@ -33,5 +30,10 @@ public class Particle extends Entity {
         if (pos.getY() > App.Companion.getHEIGHT() + MARGIN) {
             pos = new Vector2D(pos.getX(), - MARGIN);
         }
+    }
+
+    @Override
+    public double getRadius() {
+        return scale * 16 * 4;
     }
 }

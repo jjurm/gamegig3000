@@ -56,4 +56,9 @@ public class Mob extends Entity {
         }
     }
 
+    @Override
+    public double getRadius() {
+        return 70;
+    }
+
 }

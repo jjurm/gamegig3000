@@ -27,7 +27,7 @@ class Game {
     }
 
     fun update(input: Input) {
-        stars.forEach{ it.update(input)}
+        stars.forEach { it.update(input) }
         player.update(input)
         mobs.forEach { it.update(input) }
 
@@ -37,10 +37,9 @@ class Game {
             val m = iterate.next()
             if (m.isRemoved) iterate.remove()
             else m.update(input)
-            if(mobSpawner.canSpawn(this.time)) iterate.add(mobSpawner.spawn())
+            if (mobSpawner.canSpawn(this.time)) iterate.add(mobSpawner.spawn())
         }
     }
-
 
 
     fun render(g: Graphics2D) {
@@ -50,9 +49,11 @@ class Game {
         g.color = Color.white
         g.drawString((time / 1000.0).toString(), 20, 20)
 
-        stars.forEach{ it.render(g) }
+        stars.forEach { it.render(g) }
         player.render(g)
-        mobs.forEach { it.render(g) }
+        mobs.forEach {
+            it.render(g)
+        }
     }
 
     fun initializeBackground() {
@@ -64,7 +65,7 @@ class Game {
             stars.add(Particle(
                     Vector2D(r.nextDouble() * App.WIDTH, r.nextDouble() * App.HEIGHT),
                     Vector2D(0.0, starSpeed + starSpeed * speed)
-                    ,1/(4+4*speed)))
+                    , 1 / (4 + 4 * speed)))
         }
     }
 
