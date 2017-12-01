@@ -12,8 +12,8 @@ public class WaveMobSpawner implements Spawner<Mob> {
     private int height;
 
     private final long FIRST_DELAY;
-    private final int MAX_MOBS = 3;
-    private final int MAX_TELEMOBS = 1;
+    private final int MAX_MOBS = 2;
+    private final int MAX_TELEMOBS = 2;
     private final int MAX_SCALEMOBS = 1;
 
 
@@ -57,7 +57,7 @@ public class WaveMobSpawner implements Spawner<Mob> {
         if (now > lastWave + delay){
 
             delay *= 0.90;
-            if (delay < 500) delay = 500;
+            if (delay < 700) delay = 700;
 
             double count = Math.min(((FIRST_DELAY-delay)/(double)FIRST_DELAY), 1);
 
