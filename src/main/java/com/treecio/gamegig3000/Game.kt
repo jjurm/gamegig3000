@@ -1,6 +1,7 @@
 package com.treecio.gamegig3000
 
 import com.treecio.gamegig3000.entity.Mob
+import com.treecio.gamegig3000.entity.Particle
 import com.treecio.gamegig3000.entity.Player
 import java.awt.Color
 import java.awt.Graphics2D
