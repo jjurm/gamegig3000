@@ -3,20 +3,21 @@ package com.treecio.gamegig3000.entity;
 import com.treecio.gamegig3000.Input;
 import com.treecio.gamegig3000.graphics.Sprite;
 
+import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
+
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 
 public abstract class Entity {
 
-	public int x, y;
+	public Vector2D pos;
 	public double angle = 0;
 	public Sprite sprite;
 	private boolean removed = false;
 
-	public Entity(int x, int y, double angle, Sprite sprite){
+	public Entity(Vector2D pos, double angle, Sprite sprite){
+		this.pos = pos;
 		this.sprite = sprite;
-		this.x = x;
-		this.y = y;
 		this.angle = angle;
 	}
 
@@ -25,7 +26,7 @@ public abstract class Entity {
 	public void render(Graphics2D graphics){
 		AffineTransform at = new AffineTransform();
 
-		at.translate(x,y);
+		at.translate(pos.getX(), pos.getY());
 		at.rotate(angle);
 		at.scale(4,4);
 		at.translate(-sprite.getSize()/2, -sprite.getSize()/2);
@@ -40,5 +41,9 @@ public abstract class Entity {
 
 	public boolean isRemoved() {
 		return removed;
+	}
+
+	protected void move(Vector2D move){
+		pos = pos.add(move);
 	}
 }

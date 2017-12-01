@@ -3,6 +3,7 @@ package com.treecio.gamegig3000
 import com.treecio.gamegig3000.entity.Mob
 import com.treecio.gamegig3000.entity.Particle
 import com.treecio.gamegig3000.entity.Player
+import org.apache.commons.math3.geometry.euclidean.twod.Vector2D
 import java.awt.Color
 import java.awt.Graphics2D
 import java.util.*
@@ -13,13 +14,13 @@ class Game {
     private val time get() = System.currentTimeMillis() - startTime
     private val starCount = 20;
 
-    val player = Player(App.WIDTH / 2, App.HEIGHT - 100)
+    val player = Player()
     val mobs = ArrayList<Mob>()
 
     val starList = ArrayList<Particle>()
 
     fun start() {
-        mobs.add(Mob(App.WIDTH/2, 0, 0.0));
+        mobs.add(Mob(Vector2D(App.WIDTH / 2.0, 0.0), 0.0))
     }
 
     fun update(input: Input) {
@@ -32,19 +33,23 @@ class Game {
         g.clearRect(0, 0, App.WIDTH, App.HEIGHT)
 
         g.color = Color.white
-        g.drawString((time/1000.0).toString(), 20, 20)
+        g.drawString((time / 1000.0).toString(), 20, 20)
 
         starList.forEach{ it.render(g) }
         player.render(g)
         mobs.forEach { it.render(g) }
     }
 
-    fun initializeBackground(){
+    fun initializeBackground() {
         val r = Random()
         val starSpeed = 2;
 
-        for (i in 0..starCount){
-            starList.add(Particle((r.nextDouble()*App.WIDTH).toInt(), (r.nextDouble()*App.HEIGHT).toInt(), null, 0, (starSpeed+starSpeed*r.nextDouble()).toInt()));
+        for (i in 0..starCount) {
+            starList.add(Particle(
+                    Vector2D(r.nextDouble() * App.WIDTH, r.nextDouble() * App.HEIGHT),
+                    null,
+                    Vector2D(0.0, starSpeed + starSpeed * r.nextDouble())
+            ))
         }
     }
 

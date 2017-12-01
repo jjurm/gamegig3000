@@ -1,26 +1,30 @@
 package com.treecio.gamegig3000.entity;
 
+import com.treecio.gamegig3000.App;
 import com.treecio.gamegig3000.Input;
 import com.treecio.gamegig3000.graphics.Sprite;
 
-public class Particle extends Entity{
+import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
-    private int vx;
-    private int vy;
+public class Particle extends Entity {
 
-    public Particle(int x, int y, Sprite sprite, int vx, int vy){
-        super(x, y, 0, sprite);
-        this.vx = vx;
-        this.vy = vy;
+    private Vector2D v;
+
+    private static final int MARGIN = 32;
+
+    public Particle(Vector2D pos, Sprite sprite, Vector2D v){
+        super(pos, 0, sprite);
+        this.v = v;
     }
 
     @Override
     public void update(Input input){
-        x += vx;
-        y += vy;
+        pos = pos.add(v);
 
-        /* TODO: check for out of screen and move to start.
-        */
+        // check for out of screen and move to start.
+        if (pos.getY() > App.Companion.getHEIGHT() + MARGIN) {
+            pos = new Vector2D(pos.getX(), - MARGIN);
+        }
     }
 
 }
