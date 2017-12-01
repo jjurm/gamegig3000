@@ -1,7 +1,11 @@
 package com.treecio.gamegig3000
 
 import com.treecio.gamegig3000.entity.Particle
-import com.treecio.gamegig3000.entity.Player
+import com.treecio.gamegig3000.entity.Projectile
+import com.treecio.gamegig3000.entity.entities.Mob
+import com.treecio.gamegig3000.entity.entities.Player
+import com.treecio.gamegig3000.entity.spawn.MobSpawner
+import com.treecio.gamegig3000.graphics.Sprite
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D
 import java.awt.Color
 import java.awt.Graphics2D
