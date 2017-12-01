@@ -22,7 +22,7 @@ object Game : Renderable, Updatable {
     val bullets = ArrayList<Projectile>();
     val energyBar = EnergyBar()
 
-    val mobSpawner: WaveMobSpawner = WaveMobSpawner(App.WIDTH, App.HEIGHT, 5000)
+    val mobSpawner: WaveMobSpawner = WaveMobSpawner(App.WIDTH, App.HEIGHT, 1300)
     val starCount = 50
     val stars = ArrayList<Particle>()
 

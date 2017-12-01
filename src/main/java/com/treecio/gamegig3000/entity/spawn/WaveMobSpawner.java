@@ -12,9 +12,9 @@ public class WaveMobSpawner implements Spawner<Mob> {
     private int height;
 
     private final long FIRST_DELAY;
-    private final int MAX_MOBS = 20;
-    private final int MAX_TELEMOBS = 3;
-    private final int MAX_SCALEMOBS = 5;
+    private final int MAX_MOBS = 10;
+    private final int MAX_TELEMOBS = 2;
+    private final int MAX_SCALEMOBS = 3;
 
 
     private long lastWave;
@@ -56,8 +56,8 @@ public class WaveMobSpawner implements Spawner<Mob> {
         long now = System.currentTimeMillis();
         if (now > lastWave + delay){
 
-            delay *= 0.95;
-            if (delay < 2000) delay = 2000;
+            delay *= 0.90;
+            if (delay < 500) delay = 500;
 
             double count = Math.min(((FIRST_DELAY-delay)/(double)FIRST_DELAY), 1);
 
