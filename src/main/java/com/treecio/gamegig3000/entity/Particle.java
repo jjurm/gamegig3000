@@ -1,5 +1,6 @@
 package com.treecio.gamegig3000.entity;
 
+import com.treecio.gamegig3000.Input;
 import com.treecio.gamegig3000.graphics.Sprite;
 
 public class Particle extends Entity{
@@ -13,7 +14,8 @@ public class Particle extends Entity{
         this.vy = vy;
     }
 
-    public void update(){
+    @Override
+    public void update(Input input){
         x += vx;
         y += vy;
 
