@@ -1,22 +1,22 @@
 package com.treecio.gamegig3000
 
 import com.treecio.gamegig3000.entity.Particle
-import com.treecio.gamegig3000.entity.entities.Mob
-import com.treecio.gamegig3000.entity.entities.Player
-import com.treecio.gamegig3000.entity.spawn.MobSpawner
+import com.treecio.gamegig3000.entity.Player
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D
 import java.awt.Color
 import java.awt.Graphics2D
 import java.util.*
+import kotlin.collections.ArrayList
 
-class Game {
+object Game {
 
     private val startTime = System.currentTimeMillis()
     private val time get() = System.currentTimeMillis() - startTime
-    private val starCount = 20;
+    private val starCount = 50;
 
     val player = Player()
     val mobs = ArrayList<Mob>()
+    val bullets = ArrayList<Projectile>();
 
     private val mobSpawner: MobSpawner = MobSpawner(App.WIDTH, App.HEIGHT)
 
@@ -29,6 +29,7 @@ class Game {
     fun update(input: Input) {
         stars.forEach { it.update(input) }
         player.update(input)
+        bullets.forEach{ it.update(input)}
         mobs.forEach { it.update(input) }
 
 
@@ -43,7 +44,7 @@ class Game {
 
 
     fun render(g: Graphics2D) {
-        g.background = Color.black
+        g.background = Color.black;
         g.clearRect(0, 0, App.WIDTH, App.HEIGHT)
 
         g.color = Color.white
@@ -51,6 +52,7 @@ class Game {
 
         stars.forEach { it.render(g) }
         player.render(g)
+        bullets.forEach{ it.render(g) }
         mobs.forEach {
             it.render(g)
         }
@@ -58,15 +60,19 @@ class Game {
 
     fun initializeBackground() {
         val r = Random()
-        val starSpeed = 8;
+        val starSpeed = 6;
 
         for (i in 0..starCount) {
             val speed = r.nextDouble()
             stars.add(Particle(
                     Vector2D(r.nextDouble() * App.WIDTH, r.nextDouble() * App.HEIGHT),
                     Vector2D(0.0, starSpeed + starSpeed * speed)
-                    , 1 / (4 + 4 * speed)))
+                    ,1/(4-2*speed)))
         }
+    }
+
+    fun addBullet(pos: Vector2D, angle: Double, sprite: Sprite, scale: Double, speed: Double){
+        bullets.add(Projectile(pos, angle, sprite, scale, speed));
     }
 
 }
