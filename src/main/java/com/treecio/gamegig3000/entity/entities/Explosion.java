@@ -21,6 +21,12 @@ public class Explosion extends Entity {
         add(new Sprite(32, 5, 2,SpriteSheet.entities));
     }};
 
+    public static List<Sprite> sprites_short = new ArrayList<Sprite>(){{
+        add(new Sprite(32, 0, 2,SpriteSheet.entities));
+        add(new Sprite(32, 1, 2, SpriteSheet.entities));
+        add(new Sprite(32, 2, 2,SpriteSheet.entities));
+    }};
+
     public static final double explosionSpeed = 0.5;
     public static final double explosionGrowth = 0.01;
 

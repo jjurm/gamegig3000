@@ -34,10 +34,12 @@ object PlayGameState : GameState {
         mobs.forEach { it.update(input) }
 
         // detect collisions
+        var playerCollides = false
         for (mob in mobs) {
             if (player.collidesWith(mob)) {
                 mob.remove()
                 energyBar.consume(mob.damage)
+                playerCollides = true
             }
             if (mob.isAlive) {
                 for (bullet in bullets) {
@@ -50,6 +52,9 @@ object PlayGameState : GameState {
                     }
                 }
             }
+        }
+        if (playerCollides) {
+            explosions.add(Explosion(player.pos, 0.0, Explosion.sprites_short, 4.0))
         }
 
         // remove dead entities
