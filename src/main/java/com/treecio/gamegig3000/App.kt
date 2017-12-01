@@ -21,7 +21,7 @@ class App : JFrame() {
         val WIDTH = 1280
         val HEIGHT = 720
         val SCREEN_SIZE = Dimension(WIDTH, HEIGHT)
-        val FPS = 30.0
+        val FPS = 24.0
 
         @JvmStatic
         fun main(args: Array<String>) {
@@ -33,7 +33,15 @@ class App : JFrame() {
     }
 
     private val game = Game()
-    private val openBuffer = BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB)
+
+    private val frameBuffers = (0..10).map { BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB) }
+    private var openBufferIndex = 0
+    private val openBuffer get() = frameBuffers[openBufferIndex]
+    private val closedBuffer get() = frameBuffers[(openBufferIndex - 1 + frameBuffers.size) % frameBuffers.size]
+    private fun incrementBuffer() {
+        openBufferIndex = (openBufferIndex + 1) % frameBuffers.size
+    }
+
     private val keyboard = Keyboard()
 
     private val executor = Executors.newSingleThreadScheduledExecutor()
@@ -58,7 +66,7 @@ class App : JFrame() {
                 val w = (scale * App.WIDTH).toInt()
                 val h = (scale * App.HEIGHT).toInt()
 
-                g.drawImage(openBuffer, (panel.width - w) / 2, 0, w, h, null)
+                g.drawImage(closedBuffer, (panel.width - w) / 2, 0, w, h, null)
             }
         }
         //panel.preferredSize = SCREEN_SIZE
@@ -82,6 +90,7 @@ class App : JFrame() {
             game.update(keyboard.newInput)
             game.render(openBuffer.graphics as Graphics2D)
             panel.revalidate()
+            incrementBuffer()
             panel.repaint()
         } catch (e: Exception) {
             e.printStackTrace()
