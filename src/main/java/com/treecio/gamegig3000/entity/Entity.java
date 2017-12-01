@@ -1,12 +1,9 @@
 package com.treecio.gamegig3000.entity;
 
-import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.util.*;
-
-import com.treecio.gamegig3000.graphics.Screen;
 import com.treecio.gamegig3000.graphics.Sprite;
-import com.treecio.gamegig3000.level.Level;
+
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 
 public abstract class Entity {
 
