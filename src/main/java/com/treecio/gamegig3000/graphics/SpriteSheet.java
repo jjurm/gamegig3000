@@ -12,7 +12,7 @@ public class SpriteSheet {
 	private BufferedImage image;
 
 
-	public static SpriteSheet entities = new SpriteSheet("res/textures/spritesheet.png", 256);
+	public static SpriteSheet entities = new SpriteSheet("spritesheet.png", 256);
 
 	public SpriteSheet(String path, int size) {
 		this.path = path;
@@ -27,7 +27,7 @@ public class SpriteSheet {
 
 	private void load() {
 		try {
-			this.image = ImageIO.read(SpriteSheet.class.getResource(path));
+			this.image = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream(path));
 			int w = image.getWidth();
 			int h = image.getHeight();
 		} catch (IOException e) {

@@ -1,9 +1,6 @@
 package com.treecio.gamegig3000.entity;
 
-import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.util.*;
-
+import com.treecio.gamegig3000.Input;
 import com.treecio.gamegig3000.graphics.Sprite;
 
 import java.awt.Graphics2D;
@@ -23,17 +20,17 @@ public abstract class Entity {
 		this.angle = angle;
 	}
 
-	public abstract void update();
+	public abstract void update(Input input);
 
 	public void render(Graphics2D graphics){
 		AffineTransform at = new AffineTransform();
 
 		at.translate(x,y);
 		at.rotate(angle);
+		at.scale(4,4);
 		at.translate(-sprite.getSize()/2, -sprite.getSize()/2);
 
-		throw new RuntimeException("Uncomment after implementing sprite.getImage()");
-		//graphics.drawImage(sprite.getImage(), at, null);
+		graphics.drawImage(sprite.getImage(), at, null);
 	}
 
 

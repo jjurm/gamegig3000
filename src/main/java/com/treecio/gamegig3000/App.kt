@@ -1,5 +1,6 @@
 package com.treecio.gamegig3000
 
+import com.treecio.gamegig3000.input.Keyboard
 import java.awt.Color
 import java.awt.Dimension
 import java.awt.Graphics
@@ -7,7 +8,6 @@ import java.awt.Graphics2D
 import java.awt.image.BufferedImage
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
-
 import javax.swing.JFrame
 import javax.swing.JPanel
 import javax.swing.SwingUtilities
@@ -35,7 +35,9 @@ class App : JFrame() {
         }
     }
 
+    private val game = Game()
     private val openBuffer = BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB)
+    private val keyboard = Keyboard()
 
     private val panel: JPanel
     private val startTime = System.currentTimeMillis()
@@ -53,7 +55,10 @@ class App : JFrame() {
 
         contentPane.add(panel)
         pack()
+
+        addKeyListener(keyboard)
     }
+
 
     fun run() {
         update()
@@ -72,6 +77,8 @@ class App : JFrame() {
 
         g.color = Color.black
         g.drawString((time/1000.0).toString(), 20, 20)
+
+        game.player.render(g)
     }
 
 }

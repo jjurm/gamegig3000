@@ -1,22 +1,15 @@
 package com.treecio.gamegig3000.entity;
 
+import com.treecio.gamegig3000.Input;
 import com.treecio.gamegig3000.graphics.Sprite;
-import com.treecio.gamegig3000.input.Keyboard;
-import com.treecio.gamegig3000.input.Mouse;
-
-import java.awt.*;
 
 public class Player extends com.treecio.gamegig3000.entity.Entity {
 
-	private Keyboard input;
-
-
-	public Player(int x, int y, Keyboard input, Sprite sprite){
-		super(x, y,0, sprite);
-		this.input = input;
+	public Player(int x, int y){
+		super(x, y,0, Sprite.ship);
 	}
 	
-	public void update(){
+	public void update(Input input){
 		int xa = 0, ya =0;
 		if(input.up) ya--;
 		if(input.down) ya++;
