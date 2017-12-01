@@ -20,7 +20,7 @@ class Game {
     val stars = ArrayList<Particle>()
 
     fun start() {
-        mobs.add(Mob(Vector2D(App.WIDTH / 2.0, 0.0), 0.0))
+        mobs.add(Mob(Vector2D(App.WIDTH / 2.0, 0.0), 0.0, 2.0))
     }
 
     fun update(input: Input) {
@@ -43,13 +43,14 @@ class Game {
 
     fun initializeBackground() {
         val r = Random()
-        val starSpeed = 2;
+        val starSpeed = 8;
 
         for (i in 0..starCount) {
+            val speed = r.nextDouble()
             stars.add(Particle(
                     Vector2D(r.nextDouble() * App.WIDTH, r.nextDouble() * App.HEIGHT),
-                    Vector2D(0.0, starSpeed + starSpeed * r.nextDouble())
-            ))
+                    Vector2D(0.0, starSpeed + starSpeed * speed)
+                    ,1/(4+4*speed)))
         }
     }
 

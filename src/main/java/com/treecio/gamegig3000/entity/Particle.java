@@ -7,17 +7,22 @@ import com.treecio.gamegig3000.graphics.SpriteSheet;
 
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
+import java.awt.*;
+import java.awt.geom.AffineTransform;
+
 public class Particle extends Entity {
 
     public static Sprite star = new Sprite(32, 4, 0, SpriteSheet.entities);
 
     private Vector2D v;
+    private double scale;
 
     private static final int MARGIN = 32;
 
-    public Particle(Vector2D pos, Vector2D v){
-        super(pos, 0, star);
+    public Particle(Vector2D pos, Vector2D v, double scale){
+        super(pos, 0, star, scale);
         this.v = v;
+        this.scale = scale;
     }
 
     @Override
@@ -29,5 +34,4 @@ public class Particle extends Entity {
             pos = new Vector2D(pos.getX(), - MARGIN);
         }
     }
-
 }

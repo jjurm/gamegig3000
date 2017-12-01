@@ -16,7 +16,7 @@ public class Player extends com.treecio.gamegig3000.entity.Entity {
 
 	public Player(){
 		super(new Vector2D(App.Companion.getWIDTH() / 2, (int) (App.Companion.getHEIGHT() * 0.8)),
-				0, ship);
+				0, ship, 4);
 	}
 	
 	public void update(Input input){

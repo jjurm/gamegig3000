@@ -14,11 +14,13 @@ public abstract class Entity {
 	public double angle = 0;
 	public Sprite sprite;
 	private boolean removed = false;
+	private double scale;
 
-	public Entity(Vector2D pos, double angle, Sprite sprite){
+	public Entity(Vector2D pos, double angle, Sprite sprite, double scale){
 		this.pos = pos;
 		this.sprite = sprite;
 		this.angle = angle;
+		this.scale = scale;
 	}
 
 	public abstract void update(Input input);
@@ -28,7 +30,7 @@ public abstract class Entity {
 
 		at.translate(pos.getX(), pos.getY());
 		at.rotate(angle);
-		at.scale(4,4);
+		at.scale(scale,scale);
 		at.translate(-sprite.getSize()/2, -sprite.getSize()/2);
 
 		graphics.drawImage(sprite.getImage(), at, null);
