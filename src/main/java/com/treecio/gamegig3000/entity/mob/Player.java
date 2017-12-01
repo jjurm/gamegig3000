@@ -1,7 +1,6 @@
 package com.treecio.gamegig3000.entity.mob;
 
 
-import com.treecio.gamegig3000.Game;
 import com.treecio.gamegig3000.graphics.Screen;
 import com.treecio.gamegig3000.graphics.Sprite;
 import com.treecio.gamegig3000.input.Keyboard;
@@ -40,16 +39,16 @@ public class Player extends com.treecio.gamegig3000.entity.mob.Mob {
 			walking = false;
 		}
 		
-		updateShooting();
+		//updateShooting();
 	}
-	private void updateShooting() {
+	/*private void updateShooting() {
 		if(Mouse.getButton() == 1){
 			double dx = Mouse.getX() - Game.getWindowWidth()/2;
 			double dy = Mouse.getY() - Game.getWindowHeight()/2;
 			double dir = Math.atan2(dy, dx);
 			shoot(x, y, dir);
 		}		
-	}
+	}*/
 
 	public void render(Screen screen){
 		int flip = 0;

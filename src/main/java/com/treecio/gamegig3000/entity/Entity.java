@@ -3,7 +3,6 @@ package com.treecio.gamegig3000.entity;
 import java.util.*;
 
 import com.treecio.gamegig3000.graphics.Screen;
-import com.treecio.gamegig3000.level.Level;
 
 public abstract class Entity {
 
