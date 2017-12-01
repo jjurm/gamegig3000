@@ -1,8 +1,9 @@
 package com.treecio.gamegig3000
 
-import com.treecio.gamegig3000.entity.Mob
 import com.treecio.gamegig3000.entity.Particle
-import com.treecio.gamegig3000.entity.Player
+import com.treecio.gamegig3000.entity.entities.Mob
+import com.treecio.gamegig3000.entity.entities.Player
+import com.treecio.gamegig3000.entity.spawn.MobSpawner
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D
 import java.awt.Color
 import java.awt.Graphics2D
@@ -17,17 +18,30 @@ class Game {
     val player = Player()
     val mobs = ArrayList<Mob>()
 
+    private val mobSpawner: MobSpawner = MobSpawner(App.WIDTH, App.HEIGHT)
+
     val stars = ArrayList<Particle>()
 
     fun start() {
-        mobs.add(Mob(Vector2D(App.WIDTH / 2.0, 0.0), 0.0, 2.0))
+        mobs.add(mobSpawner.spawn())
     }
 
     fun update(input: Input) {
         stars.forEach{ it.update(input)}
         player.update(input)
         mobs.forEach { it.update(input) }
+
+
+        val iterate = mobs.listIterator()
+        while (iterate.hasNext()) {
+            val m = iterate.next()
+            if (m.isRemoved) iterate.remove()
+            else m.update(input)
+            if(mobSpawner.canSpawn(this.time)) iterate.add(mobSpawner.spawn())
+        }
     }
+
+
 
     fun render(g: Graphics2D) {
         g.background = Color.black

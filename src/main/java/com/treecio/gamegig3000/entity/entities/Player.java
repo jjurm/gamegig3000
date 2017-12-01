@@ -1,4 +1,4 @@
-package com.treecio.gamegig3000.entity;
+package com.treecio.gamegig3000.entity.entities;
 
 import com.treecio.gamegig3000.App;
 import com.treecio.gamegig3000.Input;
