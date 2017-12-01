@@ -25,6 +25,7 @@ public class ScaleMob extends AbstractMob{
 
     public static final double healthDecrement = 0.2;
     public static final double defaultScale = 4;
+    public static final double explosionScale = 8;
 
     public static List<Sprite> sprites = new ArrayList<Sprite>(){{
         add(new Sprite(32, 0, 1, SpriteSheet.entities));

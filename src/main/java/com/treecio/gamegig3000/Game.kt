@@ -22,6 +22,7 @@ object Game {
 
     val player = Player()
     val mobs = ArrayList<AbstractMob>()
+    val explosions = ArrayList<Explosion>()
     val bullets = ArrayList<Projectile>();
     val energyBar = EnergyBar()
 
@@ -46,6 +47,7 @@ object Game {
 
     fun update(input: Input) {
         // update each entity
+        explosions.forEach { it.update(input) }
         stars.forEach { it.update(input) }
         player.update(input)
         bullets.forEach { it.update(input) }
@@ -60,6 +62,7 @@ object Game {
             if (mob.isAlive) {
                 for (bullet in bullets) {
                     if (mob.collidesWith(bullet)) {
+                        this.explosions.add(Explosion(mob.pos, 0.0, Explosion.sprites, 4.0))
                         mob.kill()
                         bullet.kill()
                         energyBar.add(Constants.BONUS_KILL)
@@ -72,6 +75,8 @@ object Game {
         // remove dead entities
         mobs.removeIf({ !it.isAlive })
         bullets.removeIf({ !it.isAlive})
+
+        explosions.removeIf({it.isRemoved})
 
         // check if not game over
 
@@ -104,6 +109,8 @@ object Game {
             it.render(g)
         }
         energyBar.render(g)
+
+        explosions.forEach { it.render(g) }
     }
 
     fun initializeBackground() {

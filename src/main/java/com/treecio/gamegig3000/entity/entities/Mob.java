@@ -33,6 +33,7 @@ public class Mob extends AbstractMob {
     public static final double defaultFrequency = 0.1;
     public static final double defaultAmplitude = 2;
     public static final double defaultHealth = 100;
+    public static final double explosionScale = 100;
 
     public static final double healthDecrement = 0.2;
     public static final double defaultSpeed = 4;
