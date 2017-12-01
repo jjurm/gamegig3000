@@ -7,6 +7,8 @@ import java.util.*;
 import com.treecio.gamegig3000.graphics.Screen;
 import com.treecio.gamegig3000.graphics.Sprite;
 
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 
 public abstract class Entity {
 

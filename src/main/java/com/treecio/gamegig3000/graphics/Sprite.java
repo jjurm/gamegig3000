@@ -1,5 +1,9 @@
 package com.treecio.gamegig3000.graphics;
 
+import java.awt.Image;
+
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 public class Sprite {
 
 	public final int SIZE;
@@ -63,5 +67,9 @@ public class Sprite {
 				pixels[x+y*SIZE] = sheet.pixels[(x + this.x) + (y + this.y) * sheet.SIZE];
 			}
 		}
+	}
+
+	public Image getImage() {
+		throw new NotImplementedException();
 	}
 }

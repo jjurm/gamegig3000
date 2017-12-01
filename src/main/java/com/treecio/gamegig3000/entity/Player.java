@@ -13,7 +13,7 @@ public class Player extends com.treecio.gamegig3000.entity.Entity {
 
 	private Keyboard input;
 
-	
+
 	public Player(int x, int y, Keyboard input, Sprite sprite){
 		super(x, y,0, sprite);
 		this.input = input;
@@ -35,5 +35,5 @@ public class Player extends com.treecio.gamegig3000.entity.Entity {
 		x += xa;
 		y += ya;
 	}
-	
+
 }
