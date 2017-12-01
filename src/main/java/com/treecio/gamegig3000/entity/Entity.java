@@ -8,36 +8,43 @@ import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
+import java.util.List;
 
 public abstract class Entity {
 
-    public Vector2D pos;
-    public double angle = 0;
-    public Sprite sprite;
-    private boolean removed = false;
-    private double scale;
+	public Vector2D pos;
+	public double angle = 0;
+	public List<Sprite> sprites;
+	private boolean removed = false;
+	private double scale;
 
-    public Entity(Vector2D pos, double angle, Sprite sprite, double scale) {
-        this.pos = pos;
-        this.sprite = sprite;
-        this.angle = angle;
-        this.scale = scale;
-    }
+	protected int spriteState;
+	protected int spriteCount;
+
+	public Entity(Vector2D pos, double angle, List<Sprite> sprites, double scale){
+		this.pos = pos;
+		this.sprites = sprites;
+		this.angle = angle;
+		this.scale = scale;
+		this.spriteState = 0;
+		spriteCount = sprites.size();
+	}
 
     public abstract void update(Input input);
 
-    public void render(Graphics2D graphics) {
+	public void render(Graphics2D graphics){
         drawRadius(graphics);
+		AffineTransform at = new AffineTransform();
+		Sprite currentSprite = sprites.get(spriteState);
 
-        AffineTransform at = new AffineTransform();
+		at.translate(pos.getX(), pos.getY());
+		at.rotate(angle);
+		at.scale(scale,scale);
+		at.translate(-currentSprite.getSize()/2, -currentSprite.getSize()/2);
 
-        at.translate(pos.getX(), pos.getY());
-        at.rotate(angle);
-        at.scale(scale, scale);
-        at.translate(-sprite.getSize() / 2, -sprite.getSize() / 2);
+		graphics.drawImage(currentSprite.getImage(), at, null);
 
-        graphics.drawImage(sprite.getImage(), at, null);
-    }
+	}
 
 
     public void remove() {

@@ -7,9 +7,14 @@ import com.treecio.gamegig3000.graphics.SpriteSheet;
 
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Particle extends Entity {
 
-    public static Sprite star = new Sprite(32, 4, 0, SpriteSheet.entities);
+    public static List<Sprite> star = new ArrayList<Sprite>(){{
+        add(new Sprite(32, 4, 0, SpriteSheet.entities));
+    }};
 
     private Vector2D v;
     private double scale;

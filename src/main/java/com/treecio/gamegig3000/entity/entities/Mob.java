@@ -7,9 +7,18 @@ import com.treecio.gamegig3000.graphics.SpriteSheet;
 
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Mob extends Entity {
 
-    public static Sprite mob = new Sprite(32, 1, 0, SpriteSheet.entities);
+
+    public static List<Sprite> mob = new ArrayList<Sprite>(){{
+        add(new Sprite(32, 1, 0,SpriteSheet.entities));
+        add(new Sprite(32, 2, 0,SpriteSheet.entities));
+        add(new Sprite(32, 3, 0,SpriteSheet.entities));
+    }};
+
 
     private final double frequency;
     private final double amplitude;
@@ -36,6 +45,7 @@ public class Mob extends Entity {
         this.frequency = frequency;
         this.health = health;
         this.health = health;
+
     }
 
     public Mob(Vector2D pos, double angle, double scale) {
@@ -54,6 +64,9 @@ public class Mob extends Entity {
         if(health<0){
             this.remove();
         }
+
+        if(Math.random() < 0.1) spriteState++;
+        spriteState %= spriteCount;
     }
 
     @Override
