@@ -40,9 +40,11 @@ object GameOverState : ScreenOverlayState() {
 
         g.color = Color.BLACK;
         g.font = Font("OCR A Extended", PLAIN, textSize)
-        g.drawString("GAME OVER", (App.Companion.WIDTH/2)-textSize*8/2, App.Companion.HEIGHT/2)
-        g.drawString("Score: " + Game.time, (App.Companion.WIDTH/2)-textSize*9/2, App.Companion.HEIGHT/2 + 50)
-        g.drawString("R for restart", (App.Companion.WIDTH/2)-textSize*10/2, App.Companion.HEIGHT/2 + 100)
+        g.drawString("GAME OVER", (App.Companion.WIDTH/2)-textSize*6/2, App.Companion.HEIGHT/2 - 100)
+        g.drawString("Score: " + Game.time, (App.Companion.WIDTH/2)-textSize*7/2, App.Companion.HEIGHT/2 - 30)
+        g.drawString("Arrow keys to move", (App.Companion.WIDTH/2)-textSize*11/2, App.Companion.HEIGHT/2 + 50)
+        g.drawString("Space to shoot", (App.Companion.WIDTH/2)-textSize*9/2, App.Companion.HEIGHT/2 + 90)
+        g.drawString("R to restart", (App.Companion.WIDTH/2)-textSize*8/2, App.Companion.HEIGHT/2 + 130)
 
         // show "Game over"
     }
