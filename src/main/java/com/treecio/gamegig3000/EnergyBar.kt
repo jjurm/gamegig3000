@@ -20,7 +20,7 @@ class EnergyBar : Renderable, Updatable {
     }
 
     override fun update(input: Input) {
-        value = Math.min(value + 100/App.FPS/8, 100.0)
+        value = Math.min(value + 10/App.FPS, 100.0)
     }
 
     override fun render(g: Graphics2D) {

@@ -56,6 +56,7 @@ object Game {
 
         // remove dead entities
         mobs.removeIf({ !it.isAlive })
+        bullets.removeIf({ !it.isAlive})
 
         val iterate = mobs.listIterator()
         while (iterate.hasNext()) {

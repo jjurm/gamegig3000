@@ -15,7 +15,7 @@ import java.util.List;
 
 public class Player extends com.treecio.gamegig3000.entity.Entity {
 
-    private int fireCooldown = 300;
+    private int fireCooldown = 200;
     private long nextShot = 0;
 
 	public static List<Sprite> ship = new ArrayList<Sprite>(){{
@@ -38,13 +38,15 @@ public class Player extends com.treecio.gamegig3000.entity.Entity {
 		if(xa != 0 || ya != 0){
 			move(new Vector2D(xa, ya).normalize().scalarMultiply(getSpeed()));
 		}
-		fire();
 
+		if (input.space) {
+			fire();
+		}
 	}
 
 	private void fire(){
 		long now = System.currentTimeMillis();
-		if (now > nextShot){
+		if (Game.INSTANCE.getEnergyBar().consume(1) && now > nextShot) {
 
 			Game.INSTANCE.addBullet(this.pos, 0, Projectile.bullet, 2, 32);
 
