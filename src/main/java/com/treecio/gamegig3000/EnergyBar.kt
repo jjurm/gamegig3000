@@ -11,17 +11,19 @@ class EnergyBar : Renderable, Updatable {
         val HEIGHT = 8
     }
 
-    fun consume(amount: Double): Boolean {
-        if (value >= amount) {
-            value -= amount
-            return true
-        } else
-            return false
+    fun consume(amount: Double) {
+        value -= amount
+    }
+
+    fun add(amount: Double) {
+        value += amount
     }
 
     override fun update(input: Input) {
-        value = Math.min(value + 10/App.FPS, 100.0)
+        value = Math.min(value + Constants.REGENERATION / App.FPS, 100.0)
     }
+
+    fun isAlive() = value >= 0
 
     override fun render(g: Graphics2D) {
         val alpha = 100

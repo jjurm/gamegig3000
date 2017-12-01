@@ -1,5 +1,6 @@
 package com.treecio.gamegig3000.entity.entities;
 
+import com.treecio.gamegig3000.Constants;
 import com.treecio.gamegig3000.Input;
 import com.treecio.gamegig3000.entity.Entity;
 import com.treecio.gamegig3000.graphics.Sprite;
@@ -73,6 +74,8 @@ public class Mob extends Entity {
 
         if(Math.random() < 0.1) spriteState++;
         spriteState %= spriteCount;
+
+        killIfOut();
     }
 
     @Override
@@ -81,7 +84,7 @@ public class Mob extends Entity {
     }
 
     public double getDamage() {
-        return getScale() * 10;
+        return getScale() * Constants.DAMAGE_K;
     }
 
 }

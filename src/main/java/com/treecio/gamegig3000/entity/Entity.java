@@ -1,5 +1,6 @@
 package com.treecio.gamegig3000.entity;
 
+import com.treecio.gamegig3000.App;
 import com.treecio.gamegig3000.Renderable;
 import com.treecio.gamegig3000.Updatable;
 import com.treecio.gamegig3000.graphics.Sprite;
@@ -67,6 +68,14 @@ public abstract class Entity implements Renderable, Updatable {
 
     protected void move(Vector2D move) {
         pos = pos.add(move);
+    }
+
+    protected void killIfOut() {
+        double d = getRadius() * 2;
+        if (pos.getX() < -d || pos.getX() > App.Companion.getWIDTH() + d
+                || pos.getY() < -d || pos.getY() > App.Companion.getHEIGHT() + d) {
+            kill();
+        }
     }
 
     public abstract double getRadius();

@@ -27,6 +27,7 @@ public class Projectile extends Entity{
     public void update(@NotNull Input input){
         Vector2D velocity = new Vector2D(-Math.sin(angle), -Math.cos(angle));
         pos = pos.add(velocity.scalarMultiply(speed));
+        killIfOut();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.treecio.gamegig3000.entity.entities;
 
 import com.treecio.gamegig3000.App;
+import com.treecio.gamegig3000.Constants;
 import com.treecio.gamegig3000.Game;
 import com.treecio.gamegig3000.Input;
 import com.treecio.gamegig3000.Utils;
@@ -15,7 +16,7 @@ import java.util.List;
 
 public class Player extends com.treecio.gamegig3000.entity.Entity {
 
-    private int fireCooldown = 200;
+    private int fireCooldown = 100;
     private long nextShot = 0;
 
 	public static List<Sprite> ship = new ArrayList<Sprite>(){{
@@ -46,8 +47,9 @@ public class Player extends com.treecio.gamegig3000.entity.Entity {
 
 	private void fire(){
 		long now = System.currentTimeMillis();
-		if (Game.INSTANCE.getEnergyBar().consume(1) && now > nextShot) {
+		if (now > nextShot) {
 
+			Game.INSTANCE.getEnergyBar().consume(Constants.COST_FIRE);
 			Game.INSTANCE.addBullet(this.pos, 0, Projectile.bullet, 2, 32);
 
 			nextShot = now + fireCooldown;

@@ -48,6 +48,7 @@ object Game {
                     if (mob.collidesWith(bullet)) {
                         mob.kill()
                         bullet.kill()
+                        energyBar.add(Constants.BONUS_KILL)
                         break
                     }
                 }
@@ -57,6 +58,8 @@ object Game {
         // remove dead entities
         mobs.removeIf({ !it.isAlive })
         bullets.removeIf({ !it.isAlive})
+
+        // check if not game over
 
         val iterate = mobs.listIterator()
         while (iterate.hasNext()) {
