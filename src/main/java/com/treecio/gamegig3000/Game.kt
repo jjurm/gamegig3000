@@ -28,21 +28,22 @@ class Game {
     }
 
     fun render(g: Graphics2D) {
-        g.background = Color.white
+        g.background = Color.black
         g.clearRect(0, 0, App.WIDTH, App.HEIGHT)
 
-        g.color = Color.black
+        g.color = Color.white
         g.drawString((time/1000.0).toString(), 20, 20)
 
+        starList.forEach{ it.render(g) }
         player.render(g)
         mobs.forEach { it.render(g) }
     }
 
     fun initializeBackground(){
         val r = Random()
+        val starSpeed = 2;
 
         for (i in 0..starCount){
-            val starSpeed = 2;
             starList.add(Particle((r.nextDouble()*App.WIDTH).toInt(), (r.nextDouble()*App.HEIGHT).toInt(), null, 0, (starSpeed+starSpeed*r.nextDouble()).toInt()));
         }
     }

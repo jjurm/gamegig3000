@@ -54,6 +54,7 @@ class App : JFrame() {
     }
 
     fun start() {
+        game.initializeBackground()
         game.start()
         executor.scheduleAtFixedRate(this::run,
                 0, (1000.0 / FPS).toLong(), TimeUnit.MILLISECONDS)
