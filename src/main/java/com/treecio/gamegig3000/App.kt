@@ -1,6 +1,7 @@
 package com.treecio.gamegig3000
 
 import com.treecio.gamegig3000.input.Keyboard
+import java.awt.Color
 import java.awt.Dimension
 import java.awt.Graphics
 import java.awt.Graphics2D
@@ -18,7 +19,7 @@ class App : JFrame() {
     companion object {
 
         val WIDTH = 1280
-        val HEIGHT = 960
+        val HEIGHT = 720
         val SCREEN_SIZE = Dimension(WIDTH, HEIGHT)
         val FPS = 30.0
 
@@ -37,22 +38,36 @@ class App : JFrame() {
 
     private val executor = Executors.newSingleThreadScheduledExecutor()
     private var futureTask: ScheduledFuture<*>? = null
-    private val panel: JPanel
+    private lateinit var panel: JPanel
 
     init {
         defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
+        preferredSize = Dimension(WIDTH + 100, HEIGHT + 100)
+        extendedState = extendedState or JFrame.MAXIMIZED_BOTH
 
         panel = object : JPanel() {
-            override fun paintComponent(g: Graphics) {
-                g.drawImage(openBuffer, 0, 0, null)
+            override fun paintComponent(gg: Graphics) {
+                val g = gg as Graphics2D
+                g.background = Color.black
+                g.clearRect(0, 0, panel.width, panel.height)
+
+                val scale = Math.min(
+                        panel.width.toDouble() / App.WIDTH,
+                        panel.height.toDouble() / App.HEIGHT
+                )
+                val w = (scale * App.WIDTH).toInt()
+                val h = (scale * App.HEIGHT).toInt()
+
+                g.drawImage(openBuffer, (panel.width - w) / 2, 0, w, h, null)
             }
         }
-        panel.preferredSize = SCREEN_SIZE
+        //panel.preferredSize = SCREEN_SIZE
 
         contentPane.add(panel)
         pack()
         isVisible = true
         addKeyListener(keyboard)
+
     }
 
     fun start() {

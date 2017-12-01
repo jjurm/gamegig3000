@@ -40,7 +40,7 @@ public class Player extends com.treecio.gamegig3000.entity.Entity {
 	}
 
 	private int getSpeed() {
-		return 10;
+		return 14;
 	}
 
 }
