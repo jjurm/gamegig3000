@@ -17,13 +17,14 @@ class Game {
     val player = Player()
     val mobs = ArrayList<Mob>()
 
-    val starList = ArrayList<Particle>()
+    val stars = ArrayList<Particle>()
 
     fun start() {
         mobs.add(Mob(Vector2D(App.WIDTH / 2.0, 0.0), 0.0))
     }
 
     fun update(input: Input) {
+        stars.forEach{ it.update()}
         player.update(input)
         mobs.forEach { it.update(input) }
     }
@@ -35,7 +36,7 @@ class Game {
         g.color = Color.white
         g.drawString((time / 1000.0).toString(), 20, 20)
 
-        starList.forEach{ it.render(g) }
+        stars.forEach{ it.render(g) }
         player.render(g)
         mobs.forEach { it.render(g) }
     }
@@ -45,7 +46,7 @@ class Game {
         val starSpeed = 2;
 
         for (i in 0..starCount) {
-            starList.add(Particle(
+            stars.add(Particle(
                     Vector2D(r.nextDouble() * App.WIDTH, r.nextDouble() * App.HEIGHT),
                     Vector2D(0.0, starSpeed + starSpeed * r.nextDouble())
             ))
