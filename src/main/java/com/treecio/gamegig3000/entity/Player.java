@@ -11,10 +11,10 @@ public class Player extends com.treecio.gamegig3000.entity.Entity {
 	
 	public void update(Input input){
 		int xa = 0, ya =0;
-		if(input.up) ya--;
-		if(input.down) ya++;
-		if(input.left) xa--;
-		if(input.right) xa++;
+		if(input.up) ya -= getSpeed();
+		if(input.down) ya += getSpeed();
+		if(input.left) xa -= getSpeed();
+		if(input.right) xa += getSpeed();
 		if(xa != 0 || ya != 0){
 			move(xa, ya);
 		}
@@ -24,6 +24,10 @@ public class Player extends com.treecio.gamegig3000.entity.Entity {
 	private void move(int xa, int ya){
 		x += xa;
 		y += ya;
+	}
+
+	private int getSpeed() {
+		return 10;
 	}
 
 }

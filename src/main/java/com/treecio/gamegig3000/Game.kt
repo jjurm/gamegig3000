@@ -15,8 +15,8 @@ class Game {
 
     }
 
-    fun update() {
-
+    fun update(input: Input) {
+        player.update(input)
     }
 
     fun render(g: Graphics2D) {

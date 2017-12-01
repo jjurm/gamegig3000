@@ -16,20 +16,16 @@ class App : JFrame() {
 
     companion object {
 
-        val WIDTH = 640
-        val HEIGHT = 480
+        val WIDTH = 1280
+        val HEIGHT = 960
         val SCREEN_SIZE = Dimension(WIDTH, HEIGHT)
         val FPS = 30.0
-
-        private val executor = Executors.newSingleThreadScheduledExecutor()
 
         @JvmStatic
         fun main(args: Array<String>) {
             SwingUtilities.invokeLater {
                 val app = App()
-                app.isVisible = true
-                executor.scheduleAtFixedRate({ app.run() },
-                        0, (1000.0 / FPS).toLong(), TimeUnit.MILLISECONDS)
+                app.start()
             }
         }
     }
@@ -38,6 +34,7 @@ class App : JFrame() {
     private val openBuffer = BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB)
     private val keyboard = Keyboard()
 
+    private val executor = Executors.newSingleThreadScheduledExecutor()
     private val panel: JPanel
 
     init {
@@ -52,13 +49,18 @@ class App : JFrame() {
 
         contentPane.add(panel)
         pack()
-
+        isVisible = true
         addKeyListener(keyboard)
     }
 
+    fun start() {
+        game.start()
+        executor.scheduleAtFixedRate(this::run,
+                0, (1000.0 / FPS).toLong(), TimeUnit.MILLISECONDS)
+    }
 
     fun run() {
-        game.update()
+        game.update(keyboard.newInput)
         game.render(openBuffer.graphics as Graphics2D)
         panel.revalidate()
         panel.repaint()
