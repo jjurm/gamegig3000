@@ -1,5 +1,5 @@
 group 'uk.ac.cam.jm2186'
-version '1.0-SNAPSHOT'
+version '1.0'
 
 buildscript {
     ext.kotlin_version = '1.2.0'
@@ -16,6 +16,16 @@ apply plugin: 'java'
 apply plugin: 'kotlin'
 
 sourceCompatibility = 1.8
+
+//create a single Jar with all dependencies
+task fullJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'com.treecio.gamegig3000.App'
+    }
+    baseName = 'DeepSpace'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
 
 repositories {
     mavenCentral()
