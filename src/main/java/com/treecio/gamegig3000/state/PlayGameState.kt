@@ -1,9 +1,6 @@
 package com.treecio.gamegig3000.state
 
-import com.treecio.gamegig3000.App
-import com.treecio.gamegig3000.Game
-import com.treecio.gamegig3000.Input
-import com.treecio.gamegig3000.deepCopy
+import com.treecio.gamegig3000.*
 import com.treecio.gamegig3000.entity.entities.Explosion
 import com.treecio.gamegig3000.entity.entities.Player
 import java.awt.Color
@@ -49,7 +46,7 @@ object PlayGameState : GameState {
                     if (mob.collidesWith(bullet)) {
                         mob.remove()
                         bullet.remove()
-                        energyBar.add(4.0)
+                        energyBar.add(Constants.BONUS_KILL)
                         explosions.add(Explosion(mob.pos, 0.0, Explosion.sprites, 4.0))
                         break
                     }
